@@ -1,0 +1,18 @@
+# Project specific files
+paper/analytic_prime_indicator.pdf
+plot_*.pdf
+
+# LaTeX auxiliary files
+*.aux
+*.log
+*.bbl
+*.blg
+*.out
+*.synctex.gz
+
+# Python cache
+__pycache__/
+*.pyc
+
+# OS-specific files
+.DS_Store

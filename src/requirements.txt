@@ -1,0 +1,13 @@
+# =============================================================================
+# Required Python packages for the numerical verification script.
+#
+# To install all dependencies, create a virtual environment and run:
+# pip install -r requirements.txt
+# =============================================================================
+
+numpy
+matplotlib
+numba
+mpmath
+sympy
+seaborn
