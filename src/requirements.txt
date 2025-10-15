@@ -11,3 +11,5 @@ numba
 mpmath
 sympy
 seaborn
+scipy
+tqdm
