@@ -1,0 +1,54 @@
+\section{Introduction}
+
+\subsection*{Background}
+Approaches to the identification of the prime set may be grouped into four strands.
+(i) \emph{Prime–representing formulae:} exact identities such as Mills/Willans/Wilson~\cite{mills1947,willans1964,hardy2008} certify primality a posteriori but are computationally ineffective at scale; arithmetic terms for $\pi(x)$ and the $n$-th prime are given in~\cite{prunescu2024}.
+(ii) \emph{Analytic zero–set constructions:} by Weierstrass factorization, entire functions with prescribed discrete zero sets exist, including ones vanishing exactly on primes; effectivity between integers is not provided~\cite{boas1954}. Related optical/scattering constructions appear in~\cite{petersen2019,li2019-optical,zhang2018-structure,torquato2018-scattering}.
+(iii) \emph{Elementary trigonometric/kernel encoders:} divisibility can be encoded by quotients of sines
+\[
+Q(x,i):=\frac{\sin^2(\pi x)}{\sin^2(\pi x/i)}\qquad(i\in\mathbb N,\ i\ge2),
+\]
+which are continuous with removable singularities at integer arguments and relate to Fejér-type kernels via the Chebyshev identity \(\sin(ny)=U_{n-1}(\cos y)\sin y\)~\cite{katznelson2004,zygmund2002}. A different smooth analytic approximation of the prime characteristic function is studied in~\cite{semenov2025}.
+(iv) \emph{L-function and sieve methods:} classical analytic number theory studies primes via \(\Lambda\), explicit formulas, zero-density estimates, and sieve weights; see~\cite{iwaniec2004,montgomery2007}.  
+
+The construction in strand (iii) is adopted in the form of Fejér cosine polynomials to regularize trial division into a pointwise-defined function on $\mathbb{R}$. The resulting function retains a direct arithmetic meaning at integers and admits explicit control of smoothness and the locations and sizes of derivative jumps.
+
+\subsection*{Method and Definition}
+The Fejér identity converts the quotient-of-sines representation into a cosine polynomial
+\[
+F(x,i)=i+2\sum_{k=1}^{i-1}(i-k)\cos\!\left(\frac{2\pi k x}{i}\right)\qquad(i\ge2),
+\]
+which agrees with \(Q(x,i)\) away from removable singularities. At integer arguments, the normalized term $F(n,i)/i^2$ acts as an exact \emph{divisor filter}, evaluating to $\mathbf{1}_{i\mid n}$. The aggregate indicator is then defined as
+\[
+\mathcal P(x)=\frac{1}{x}\sum_{i=2}^{\lceil\sqrt{x}\rceil} F(x,i)\qquad(x>1).
+\]
+The construction produces a \(C^1\) function on \((0,\infty)\) with a direct arithmetic interpretation at integers:
+\[
+\mathcal P(n)=\frac{1}{n}\sum_{\substack{2\le d\le \lceil\sqrt n\rceil\\ d\mid n}} d^2.
+\]
+A resonant partial-fraction form and quantitative truncation bounds are provided in (Proposition~\ref{prop:RPF}, Theorem~\ref{thm:RPF-trunc}).
+
+\subsection*{Main Results}
+\begin{itemize}
+  \item \textbf{Exact prime-zero characterization at odd integers.} For integers \(n\ge2\), \(\mathcal P(n)=0\) holds if and only if $n$ is an odd prime, while \(\mathcal P(2)>0\). For all non-integer \(x>1\), \(\mathcal P(x)>0\). (Theorem~\ref{thm:primezero}.)
+  \item \textbf{A precise characterization of smoothness.} The function \(\mathcal P\) is \(C^1\) on \((0,\infty)\) and piecewise \(C^\infty\). Its second derivative has jump discontinuities exclusively at integer squares \(x=m^2\), governed by the explicit formula
+  \[
+  \Delta_{m^{2}}\mathcal{P}''=\frac{2\pi^{2}}{m^{2}\sin^{2}\!\bigl(\pi/(m+1)\bigr)}
+  =2+\frac{4}{m}+O(m^{-2}).
+  \]
+  (Proposition~\ref{prop:second}.)
+  \item \textbf{Extension to smooth analogues of arithmetic functions.} The construction is generalized to obtain \(C^\infty\) analogues \(\mathcal P_\tau(\cdot;\kappa)\) and \(\mathcal P_\sigma(\cdot;\kappa)\), which admit locally uniform control of all derivative series. For integers \(n\ge2\) and in the limit \(\kappa\to\infty\), these functions converge to values determined by classical arithmetic functions:
+  \[
+  \mathcal{P}_\tau(n;\kappa)\to \tau(n)-2,\qquad
+  \mathcal{P}_\sigma(n;\kappa)\to \sigma(n)-n-1.
+  \]
+\end{itemize}
+
+\subsection*{Scope and Limitations}
+All statements about primes and composites concern integer input. No claims are made regarding the prime number theorem, densities, or zero-free regions. The indicator $\mathcal P$ characterizes odd primality at integers and requires $\Theta(\sqrt n)$ work, so no algorithmic advantage over trial division is implied. For non-integer input, only conjectural local features near odd primes are discussed for the smooth variants.
+
+\subsection*{Computational Aspects}
+Numerical experiments for the figures were produced by straightforward \(\Theta(\sqrt{x})\) evaluation using quotient-of-sines with resonance guards; the repository contains the scripts and parameter files required to reproduce the figures.\footnote{Repository: \url{https://github.com/SebastianFoxxx/analytic-prime-indicator}}
+
+% ---------------------------------------------------------------------------
+

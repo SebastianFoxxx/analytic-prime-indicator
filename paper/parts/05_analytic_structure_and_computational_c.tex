@@ -1,0 +1,197 @@
+\section{Analytic Structure and Computational Complexity}
+
+This section investigates deeper analytic properties of $\mathcal{P}(x)$, including a resonant partial-fraction identity that provides explicit error bounds for numerical evaluation schemes.
+
+\subsection{Lower and upper bounds for composite integers}
+A quantitative lower bound for composite $n$ follows from Theorem~\ref{thm:primezero}. With $N(n)=\lceil\sqrt n\rceil$,
+\[
+\mathcal{P}(n) = \frac{1}{n} \sum_{\substack{d\mid n \\ 2 \le d \le N(n)}} d^2 \;\ge\; \frac{4}{n},
+\]
+since every composite $n$ has a divisor $d$ with $2\le d\le\sqrt n\le N(n)$.
+Equality holds precisely when the only divisor $d$ in the range $2\le d\le N(n)$ is $d=2$. This occurs if and only if $n=2p$ with a prime $p\ge5$, or $n\in\{4,8\}$; the case $n=6$ is excluded because $3=N(6)$ divides $6$, so that $\mathcal P(6)=(4+9)/6=13/6$. For higher powers of two, $n=2^k$ with $k\ge 4$, the divisor $d=4$ satisfies $2\le d\le\sqrt{n}$ and contributes an additional positive term, and for $n=2p^a$ with $a\ge 2$ an extra divisor $d=p$ lies in the range; hence equality fails in all remaining composite cases. A complementary upper bound follows from
+\[
+\sum_{d\le N(n)} d^2 \;=\; \frac{1}{6}\,N(n)\bigl(N(n)+1\bigr)\bigl(2N(n)+1\bigr)
+\;=\; \frac{1}{3}n^{3/2} + O(n),
+\]
+using $\sqrt n\le N(n)<\sqrt n+1$, which implies
+\[
+\mathcal{P}(n) \;\le\; \frac{1}{n}\sum_{d\le N(n)} d^2
+\;=\; \frac{1}{3}\,n^{1/2} + O(1).
+\]
+The summation limit $N(n)$ cannot be replaced by $\sqrt n$ here: for $n=6$ the sum over $d\le\sqrt6$ gives $5/6<\mathcal P(6)$.
+Thus $\mathcal{P}(n)$ lies between $4/n$ and $\ll n^{1/2}$, which determines the scale of $\mathcal{P}(n)$ on composite integers.
+
+\begin{remark}[Equality case for the lower bound]
+Equality $\mathcal{P}(n)=4/n$ holds iff the only divisor of $n$ in $[2,N(n)]$ is $2$, i.e.\ iff $n=2p$ with a prime $p\ge5$, or $n\in\{4,8\}$. The integer $n=6$ is not an equality case, since $3=N(6)$ divides $6$.
+\end{remark}
+
+\subsection{Computational Complexity}
+
+\smallskip
+\noindent\textit{(A) Direct Fejér-sum evaluation.}
+Using \eqref{eq:Fxi} inside \eqref{eq:Px} leads to $\sum_{i\le \lceil\sqrt{x}\rceil}\sum_{k<i}$ cosine evaluations.
+This costs $\sum_{i\le N(x)}(i-1)=\tfrac12N(x)(N(x)-1)=\Theta(x)$ operations, thus $O(x)$.
+
+\smallskip
+\noindent\textit{(B) Quotient-of-sines evaluation.}
+For $x\notin\mathbb{Z}$, each summand can be computed as $F(x,i)=\sin^2(\pi x)/\sin^2(\pi x/i)$, avoiding the inner sum.
+This yields $\Theta(N(x))=\Theta(\sqrt{x})$ evaluations overall, thus $O(\sqrt{x})$.
+At integer $x=n$ and divisors $i\mid n$, the limit is evaluated via L’Hôpital’s rule, giving $F(n,i)=i^2$; numerically this can be handled either by a branch for $|x/i-\mathrm{round}(x/i)|<\varepsilon$ or by evaluating $\lim_{t\to0}\sin^2(\pi n)/\sin^2(\pi(n/i+t))=i^2$.
+For non-divisors, the denominator stays bounded away from $0$ and the quotient is safe.
+The finitely many divisor cases do not alter the overall $O(\sqrt{x})$ complexity.
+
+\smallskip
+\noindent\textit{(C) Resonant partial fractions (RPF).}
+By Proposition~\ref{prop:RPF},
+\[
+F(x,i)=\frac{i^{2}}{\pi^{2}}\sin^{2}(\pi x)\sum_{k\in\mathbb{Z}}\frac{1}{(x-ik)^{2}}.
+\]
+For evaluation, sum only the $(2K{+}1)$ nearest poles around $m=\mathrm{round}(x/i)$ (any fixed tie-breaking rule is admissible); Theorem~\ref{thm:RPF-trunc} yields an \emph{absolute} error bound $O(1/K)$, independent of $i$ apart from the prefactor $\sin^{2}(\pi x)$.  
+Away from integers, Corollary~\ref{cor:RPF-relative} gives a \emph{relative} bound of size $\le \frac{1}{\pi^{2}}\bigl(\frac1K+\frac1{K+1}\bigr)$ for $K\ge1$. With fixed small $K$ (e.g. $K=1,2$) the total cost remains $O(\sqrt{x})$, and stability near resonances is preserved without branch switching.
+
+\paragraph*{Stable evaluation near resonances}
+When $x/i$ is close to an integer, the quotient form loses significance. In the regime $\bigl|x/i-\operatorname{round}(x/i)\bigr|<\varepsilon$ use a constant-time local Taylor surrogate for 
+\[
+F(x,i)=\left(\frac{\sin(\pi x)}{\sin(\pi x/i)}\right)^{\!2}.
+\]
+Write $x=im+t$ with $m=\operatorname{round}(x/i)$ and $|t|<\varepsilon i$. Then
+\[
+F(x,i)=i^2\Bigl(1-\alpha_i(\pi t)^2\Bigr)^2+R_i(t),\qquad 
+\alpha_i=\tfrac{1}{6}\Bigl(1-\tfrac{1}{i^2}\Bigr),
+\]
+with the explicit remainder bound from Lemma~\ref{lem:resonance}. At exact divisors ($t=0$) return $i^2$. This branch costs $O(1)$ per index, hence the total remains $O(\sqrt{x})$. Since the remainder has relative size $O((\pi t)^4)$, the surrogate should be restricted to very small $|t|$ (in double precision, e.g.\ $|t|\le10^{-4}$); otherwise the shifted exact quotient $F(x,i)=\sin^2(\pi t)/\sin^2(\pi t/i)$ is preferable, see Appendix~\ref{app:code}.
+
+\medskip
+\begin{lemma}[Resonant indices and local even expansion]\label{lem:resonance}
+Let $\varepsilon\in(0,\tfrac14]$, $i\ge2$, and write $m=\mathrm{round}(x/i)$ and $x=mi+t$ with $|t|\le \varepsilon i$. Then
+\[
+\frac{\sin(\pi x)}{\sin(\pi x/i)} \;=\; (-1)^{m(i-1)}\,i\Bigl(1-\alpha_i(\pi t)^2\Bigr)\;+\;R_i^{(s)}(t),
+\qquad
+\alpha_i=\frac{1}{6}\Bigl(1-\frac{1}{i^{2}}\Bigr),
+\]
+and the remainder satisfies the uniform bound
+\[
+\bigl|R_i^{(s)}(t)\bigr|\;\le\; i\,C(\varepsilon)\,(\pi|t|)^4,
+\qquad
+C(\varepsilon):=\frac{1}{120}\,c(\varepsilon)^{-2},\quad
+c(\varepsilon):=1-\frac{\pi^2\varepsilon^2}{6}-\frac{\pi^4\varepsilon^4}{120}.
+\]
+Consequently,
+\[
+F(x,i)=\left(\frac{\sin(\pi x)}{\sin(\pi x/i)}\right)^{\!2}
+= i^2\Bigl(1-2\alpha_i(\pi t)^2\Bigr)\;+\;R_i^{(F)}(t),
+\qquad
+\bigl|R_i^{(F)}(t)\bigr|\;\le\; i^2\,\widetilde C(\varepsilon)\,(\pi|t|)^4
+\]
+where squaring the previous line gives $R_i^{(F)}=i^2\alpha_i^2(\pi t)^4\pm2i\bigl(1-\alpha_i(\pi t)^2\bigr)R_i^{(s)}+\bigl(R_i^{(s)}\bigr)^2$, so that $\widetilde C(\varepsilon):=\tfrac1{36}+2C(\varepsilon)+C(\varepsilon)^2$ is admissible whenever $\pi|t|\le1$; for $\varepsilon=\tfrac14$ this is $\widetilde C=0.0488$, against a numerically observed supremum of $0.0442$ on $|t|\le i/4$.
+Moreover, for fixed $m\ge1$ the set $\{\,i\ge2:|x/i-m|<\varepsilon\,\}$ equals
+\[
+I_m:=\Bigl(\frac{x}{m+\varepsilon},\,\frac{x}{m-\varepsilon}\Bigr)\cap [2,\infty).
+\]
+If $2\le i\le\sqrt{x}$ is resonant with $m=\mathrm{round}(x/i)$, then $m\ge M_\varepsilon(x):=\lceil\sqrt{x}-\varepsilon\rceil$ (which may equal $\lfloor\sqrt{x}\rfloor<\lceil\sqrt{x}\rceil$; e.g.\ $x=4.01$, $i=m=2$). Hence these indices lie in $\bigcup_{m\ge M_\varepsilon(x)}I_m$, whose total length satisfies, for all $x\ge 4$,
+\[
+\sum_{m\ge M_\varepsilon(x)}\! |I_m|
+\;\le\;\sum_{m\ge M_\varepsilon(x)}\frac{2\varepsilon\,x}{m^2-\varepsilon^2}
+\;\le\; \frac{2\varepsilon\,x}{M_\varepsilon(x)-\tfrac12}
+\;\le\; 4\,\varepsilon\,\sqrt{x}.
+\]
+
+\begin{proof}
+Taylor expansions with Lagrange remainder give, for $|t|\le\varepsilon i$,
+\[
+\sin(\pi t)=\pi t-\frac{(\pi t)^3}{6}+R_5(\pi t),\qquad |R_5(z)|\le \frac{|z|^5}{120},
+\]
+\[
+\sin\!\Bigl(\frac{\pi t}{i}\Bigr)=\frac{\pi t}{i}-\frac{(\pi t)^3}{6i^3}+R_5\!\Bigl(\frac{\pi t}{i}\Bigr),
+\qquad 
+\Bigl|R_5\!\Bigl(\frac{\pi t}{i}\Bigr)\Bigr|\le \frac{(\pi |t|/i)^5}{120}.
+\]
+Factoring $\frac{\pi t}{i}$ from the denominator yields
+\[
+\sin\!\Bigl(\frac{\pi t}{i}\Bigr)
+=\frac{\pi t}{i}\Bigl(1-\frac{\pi^2 t^2}{6i^2}+E_i(t)\Bigr),
+\qquad 
+|E_i(t)|\le \frac{(\pi |t|/i)^4}{120}\le \frac{\pi^4\varepsilon^4}{120}.
+\]
+Hence, for $|t|\le \varepsilon i$,
+\[
+\Bigl|\sin\!\Bigl(\frac{\pi t}{i}\Bigr)\Bigr|
+\;\ge\;\frac{\pi |t|}{i}\Bigl(1-\frac{\pi^2\varepsilon^2}{6}-\frac{\pi^4\varepsilon^4}{120}\Bigr)
+=\frac{\pi |t|}{i}\,c(\varepsilon).
+\]
+Division of the two Taylor series and inversion of the parenthesis by a Neumann series, justified by $c(\varepsilon)>0$ for $\varepsilon\in(0,\tfrac14]$, shows that the odd powers cancel and produces
+\[
+\frac{\sin(\pi x)}{\sin(\pi x/i)}
+=(-1)^{m(i-1)}\,i\Bigl(1-\alpha_i(\pi t)^2\Bigr)+R_i^{(s)}(t),
+\qquad \alpha_i=\frac{1}{6}\Bigl(1-\frac{1}{i^2}\Bigr),
+\]
+with the uniform remainder bound
+\[
+|R_i^{(s)}(t)|\le i\,C(\varepsilon)\,(\pi |t|)^4,
+\qquad 
+C(\varepsilon)=\frac{1}{120}\,c(\varepsilon)^{-2}.
+\]
+Squaring gives
+\[
+F(x,i)=\left(\frac{\sin(\pi x)}{\sin(\pi x/i)}\right)^{\!2}
+= i^2\Bigl(1-2\alpha_i(\pi t)^2\Bigr)+R_i^{(F)}(t),
+\]
+with $|R_i^{(F)}(t)|\le i^2\,\widetilde C(\varepsilon)\,(\pi |t|)^4$ as in Lemma~\ref{lem:resonance}; the explicit constant given there requires $\pi|t|\le1$, which holds here because $|t|=|x/i-m|<\varepsilon\le\tfrac14$. 
+
+For the resonance set, $|x/i-m|<\varepsilon$ is equivalent to $i\in(x/(m+\varepsilon),x/(m-\varepsilon))$, intersected with $[2,\infty)$ to respect the index range; hence $|I_m|\le\frac{2\varepsilon\,x}{m^2-\varepsilon^2}$. If $i\le\sqrt{x}$, then $x/i\ge\sqrt{x}$, so a resonant $m=\mathrm{round}(x/i)$ satisfies $m>\sqrt{x}-\varepsilon$, i.e.\ $m\ge M_\varepsilon(x)$. Since $\varepsilon\le\tfrac14$, one has $m^2-\varepsilon^2\ge m^2-\tfrac14=(m-\tfrac12)(m+\tfrac12)$, and the resulting series telescopes:
+\[
+\sum_{m\ge M_\varepsilon(x)}\! |I_m|
+\le\sum_{m\ge M_\varepsilon(x)}\frac{2\varepsilon\,x}{m^2-\varepsilon^2}
+\le 2\varepsilon\,x\sum_{m\ge M_\varepsilon(x)}\Bigl(\frac{1}{m-\frac12}-\frac{1}{m+\frac12}\Bigr)
+=\frac{2\varepsilon\,x}{M_\varepsilon(x)-\frac12}.
+\]
+Finally $M_\varepsilon(x)-\tfrac12\ge\sqrt{x}-\tfrac34\ge\tfrac12\sqrt{x}$ for $x\ge\tfrac94$, which gives the bound $4\varepsilon\sqrt{x}$ for all $x\ge 4$.
+\end{proof}
+\end{lemma}
+
+
+\begin{theorem}[RPF truncation with explicit remainder]\label{thm:RPF-trunc}
+Let $i\ge 2$, $x\in\mathbb{R}$, $m:=\mathrm{round}(x/i)$, and $K\in\mathbb{N}_0$. Define the symmetric truncation
+\[
+S_{i,K}(x)\;:=\;\frac{1}{(x-i m)^{2}}+\sum_{r=1}^{K}\Biggl[\frac{1}{\bigl(x-i(m+r)\bigr)^{2}}+\frac{1}{\bigl(x-i(m-r)\bigr)^{2}}\Biggr].
+\]
+Then
+\[
+\left|\,F(x,i)-\frac{i^{2}}{\pi^{2}}\sin^{2}(\pi x)\,S_{i,K}(x)\,\right|
+\ \le\ \frac{\sin^{2}(\pi x)}{\pi^{2}}\,\Bigl(\psi_1\bigl(K+\tfrac12\bigr)+\psi_1\bigl(K+\tfrac32\bigr)\Bigr),
+\]
+where $\psi_1(y)=\sum_{j\ge0}(j+y)^{-2}$ denotes the trigamma function. The bound is attained for $|x-im|=i/2$. Explicitly, the right-hand side equals $(1-4/\pi^{2})\sin^{2}(\pi x)$ for $K=0$, and it is at most $\frac{\sin^{2}(\pi x)}{\pi^{2}}\bigl(\frac1K+\frac1{K+1}\bigr)$ for $K\ge1$.
+\end{theorem}
+
+\begin{remark}[Integer arguments in the RPF truncation]
+At integer $x=n$, the estimate is interpreted as $x\to n$. If $i\nmid n$, then $\sin(\pi n/i)\neq 0$ and no ambiguity occurs. If $i\mid n$, the removable $0/0$ singularity is resolved by the entire extension, yielding $F(n,i)=i^2$.
+\end{remark}
+
+\begin{proof}
+By Proposition~\ref{prop:RPF}, $F(x,i)=(i^{2}/\pi^{2})\sin^{2}(\pi x)\sum_{k\in\mathbb{Z}}(x-ik)^{-2}$. Put $t:=x-im$, so that $|t|\le i/2$. For $r\ge1$ the two poles $i(m\pm r)$ contribute
+\[
+g_r(t):=\frac{1}{(ri-t)^{2}}+\frac{1}{(ri+t)^{2}},
+\]
+which is even in $t$ and increasing in $|t|$ on $[0,i/2]$, because $g_r'(t)=2(ri-t)^{-3}-2(ri+t)^{-3}>0$ for $0<t<ri$. Hence
+\[
+\sum_{r>K}g_r(t)\ \le\ \sum_{r>K}g_r\bigl(\tfrac i2\bigr)
+\ =\ \frac{1}{i^{2}}\sum_{r\ge K+1}\Bigl(\frac{1}{(r-\frac12)^{2}}+\frac{1}{(r+\frac12)^{2}}\Bigr)
+\ =\ \frac{1}{i^{2}}\Bigl(\psi_1\bigl(K+\tfrac12\bigr)+\psi_1\bigl(K+\tfrac32\bigr)\Bigr),
+\]
+with equality for $|t|=i/2$. Multiplication by $(i^{2}/\pi^{2})\sin^{2}(\pi x)$ yields the claim. For $K=0$ one has $\psi_1(\tfrac12)+\psi_1(\tfrac32)=\tfrac{\pi^2}{2}+\bigl(\tfrac{\pi^2}{2}-4\bigr)=\pi^2-4$. For $K\ge1$ the inequality $(j+\tfrac12)^2>j(j+1)$ gives $\psi_1(K+\tfrac12)=\sum_{j\ge K}(j+\tfrac12)^{-2}<\sum_{j\ge K}\frac{1}{j(j+1)}=\frac1K$, and likewise $\psi_1(K+\tfrac32)<\frac1{K+1}$.
+\end{proof}
+
+\begin{corollary}[Relative truncation]\label{cor:RPF-relative}
+Let $x\notin\mathbb Z$, $i\ge 2$ and $K\in\mathbb N_0$, and set $m:=\mathrm{round}(x/i)$. Then
+\begin{align*}
+\frac{\Bigl|\,F(x,i)-\frac{i^{2}}{\pi^{2}}\sin^{2}(\pi x)\,S_{i,K}(x)\,\Bigr|}{F(x,i)}
+&\ \le\ \frac{1}{\pi^{2}}\Bigl(\psi_1\bigl(K+\tfrac12\bigr)+\psi_1\bigl(K+\tfrac32\bigr)\Bigr)\\
+&\ \le\ \frac{1}{\pi^{2}}\Bigl(\frac1K+\frac1{K+1}\Bigr)\qquad(K\ge1),
+\end{align*}
+and the left-hand side is at most $1-4/\pi^{2}$ for $K=0$. This follows from Theorem~\ref{thm:RPF-trunc} and $F(x,i)=\sin^2(\pi x)/\sin^2(\pi x/i)\ge\sin^2(\pi x)>0$. In particular, for $K\ge 1$ the relative error is at most $3/(2\pi^{2})<0.152$.
+\end{corollary}
+
+
+\noindent\textit{Algorithm for stable evaluation of $\mathcal{P}(x)$.} A reference implementation is provided in Appendix~\ref{app:code}.
+
+% ---------------------------------------------------------------------------

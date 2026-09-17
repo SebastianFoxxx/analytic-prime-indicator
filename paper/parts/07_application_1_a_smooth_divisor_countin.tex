@@ -1,0 +1,273 @@
+\section{Application 1: A Smooth Divisor-Counting Function (\texorpdfstring{$\mathcal{P}_{\tau}$}{P_tau})}
+
+\subsection{Motivation and Construction}
+A smooth analogue of the divisor-counting function $\tau(n)$ is constructed. For an integer $n$, the Fejér term $F(n,d)$ evaluates to $d^2$ if $d$ divides $n$. A unit contribution per divisor is obtained by scaling with $d^{-2}$, which leads to the weighting function $W(i)=1/i^2$. The resulting sum over $i \ge 2$ approximates $\tau(n)-1$ (the number of divisors excluding $1$). A subtraction by $1$ is then applied so that the expression vanishes at primes (where $\tau(n)-1=1$).
+
+\begin{definition}[Smooth Divisor-Counting Function]
+For $x>0$ and a steepness parameter $\kappa>0$, define the smooth divisor-counting analogue
+\begin{equation}\label{eq:Ptau}
+\mathcal{P}_{\tau}(x; \kappa) = \left( \sum_{i=2}^{\infty} \phi_{\kappa}\!\left(\frac{i}{x+1}\right) \cdot \frac{F(x,i)}{i^2} \right) - 1,
+\end{equation}
+where $\phi_{\kappa}$ is given by \eqref{eq:phimod} and $F(x,i)$ by \eqref{eq:Fxi}.
+\end{definition}
+
+\begin{lemma}[Explicit cutoff-derivative bounds]\label{lem:cutoff-derivatives}
+Let $\kappa>0$ and $K=[a,b]\subset(0,\infty)$ be compact. For every integer $r\ge 0$ and all $i\ge 2$,
+\[
+\sup_{x\in K}\,\Bigl|\partial_x^r\,\phi_{\kappa}\!\Bigl(\frac{i}{x+1}\Bigr)\Bigr|
+\ \le\ \frac{e^{2\kappa}\,(1+2\kappa)^r\,r!\,B_r}{(a+1)^{r}}\; i^{\,r}\, \exp\!\Bigl(-\frac{2\kappa}{\,b+1\,}\, i\Bigr),
+\]
+where $B_r>0$ depends only on $r$. Equivalently, one may set
+\[
+C_{r,K,\kappa}:=\frac{e^{2\kappa}\,(1+2\kappa)^r\,r!\,B_r}{(a+1)^{r}},\qquad c_{K,\kappa}:=\frac{2\kappa}{\,b+1\,},
+\]
+so that $\sup_{x\in K}|\partial_x^r\,\phi_{\kappa}(i/(x+1))|\le C_{r,K,\kappa}\, i^{r}\, e^{-c_{K,\kappa}\, i}$. The factor $e^{2\kappa}$ cannot be omitted: for $r=0$ and $2\le i<a+1$ the left-hand side tends to $1$ as $\kappa\to\infty$, whereas $\exp(-2\kappa i/(b+1))\to0$.
+\begin{proof}
+Write $\phi_\kappa(u)=(1+e^{2\kappa(u-1)})^{-1}$ and $u(x)=i/(x+1)$. For $x\in K$ one has $u(x)\ge i/(b+1)$, hence $\phi_\kappa(u(x))\le e^{-2\kappa(u(x)-1)}\le e^{2\kappa}\exp(-(2\kappa/(b+1))\,i)$; this is the case $r=0$. Set $y(x)=\kappa(u(x)-1)$ and use Faà di Bruno’s formula for derivatives of $\tanh$ with $\phi_\kappa=(1-\tanh y)/2$. Since $u^{(j)}(x)=(-1)^j j!\,i\,(x+1)^{-(j+1)}$, it follows that $\sup_{x\in K}|u^{(j)}(x)|\le j!\,i\,(a+1)^{-(j+1)}$. Moreover, every derivative of $\tanh$ of order $\ge1$ is a polynomial in $\tanh$ times $\mathrm{sech}^2$, and $\mathrm{sech}^2 y(x)\le 4e^{-2|y(x)|}\le 4\,e^{-2\kappa(u(x)-1)}\le 4e^{2\kappa}\exp(-2\kappa i/(b+1))$. Since $a+1>1$, each product of $k\ge1$ derivatives of $u$ of total order $r$ is bounded by $C_r\,i^{k}(a+1)^{-r}\le C_r\,i^{r}(a+1)^{-r}$, and each derivative of $\tanh$ comes with a factor $\kappa\le\frac12(1+2\kappa)$. Collecting factors gives, for $r\ge1$,
+\[
+\sup_{x\in K}\bigl|\partial_x^r\,\tanh(y(x))\bigr|\ \le\ \frac{e^{2\kappa}\,(1+2\kappa)^r\,r!\,B_r}{(a+1)^{r}}\,i^{\,r}\,\exp\!\Bigl(-\frac{2\kappa}{\,b+1\,}\,i\Bigr),
+\]
+and the same upper bound applies to $\partial_x^r\phi_\kappa(u(x))$ up to an absolute factor absorbed into $B_r$. This proves the stated bound.
+\end{proof}
+\end{lemma}
+
+
+
+\subsection{Properties of $\mathcal{P}_{\tau}$}
+
+\begin{proposition}[Fejér derivative bounds]\label{prop:fejer-bounds}
+For $i\ge2$ and $x\in\R$, let
+\[
+F(x,i)= i + 2\sum_{k=1}^{i-1}(i-k)\cos\!\left(\frac{2\pi k x}{i}\right).
+\]
+Then for every integer $l\ge0$ there exists a constant $B_l>0$, depending only on $l$, such that
+\[
+\sup_{x\in\R}\bigl| \partial_x^l F(x,i) \bigr|
+\ \le\ \frac{2}{(l+1)(l+2)}(2\pi)^l\,i^{2}\;+\;B_l(2\pi)^l\,i,
+\qquad \forall i\ge2.
+\]
+In particular, for $l=0$ one has $|F(x,i)|\le i^2$, and
+\[
+\sup_{x\in\R}\bigl| \partial_x^l (F(x,i)/i^2) \bigr| \ \le\ \frac{2}{(l+1)(l+2)}(2\pi)^l\;+\;B_l(2\pi)^l\,i^{-1},
+\]
+\[
+\sup_{x\in\R}\bigl| \partial_x^l (F(x,i)/i) \bigr| \ \le\ \frac{2}{(l+1)(l+2)}(2\pi)^l\,i\;+\;B_l(2\pi)^l.
+\]
+\begin{proof}
+Differentiation yields, for $l\ge1$,
+\[
+\partial_x^l F(x,i)=2\sum_{k=1}^{i-1}(i-k)\left(\frac{2\pi k}{i}\right)^{\!l}
+\!\times\!
+\begin{cases}
+\cos(2\pi k x/i), & l\ \text{even},\\
+-\sin(2\pi k x/i), & l\ \text{odd}.
+\end{cases}
+\]
+Since $|\cos(\cdot)|\le 1$ and $|\sin(\cdot)|\le 1$,
+\[
+\bigl|\partial_x^l F(x,i)\bigr|
+\le 2\left(\frac{2\pi}{i}\right)^{\!l}\sum_{k=1}^{i-1}(i-k)k^l.
+\]
+Faulhaber's formula gives $\sum_{k=1}^{i-1}(i-k)k^l=\frac{i^{l+2}}{(l+1)(l+2)}+R_l(i)$ with $|R_l(i)|\le A_l\,i^{l+1}$. Consequently,
+\[
+\sup_{x\in\R}\bigl|\partial_x^l F(x,i)\bigr|
+\le \frac{2}{(l+1)(l+2)}(2\pi)^l\,i^{2}+B_l(2\pi)^l\,i,
+\]
+where one may take $B_l\ge 2A_l$ independent of $i$; for $l=0$ the constant term $i$ of $F$ is added, which is covered by $B_0\ge 2A_0+1$ (in fact $0\le F(x,i)\le i^2$ by Fejér's identity). The stated corollaries follow by dividing by $i^2$ or $i$.
+\end{proof}
+\end{proposition}
+
+\begin{remark}[Sharper leading constant]
+Faulhaber’s formula implies, for all fixed $l\ge 0$ and integers $i\ge 2$,
+\[
+\sum_{k=1}^{i-1}(i-k)k^l=\frac{i^{l+2}}{(l+1)(l+2)}+R_{l}(i),\qquad |R_{l}(i)|\le A_l\,i^{l+1},
+\]
+for some $A_l>0$. Consequently,
+\[
+\sup_{x\in\mathbb{R}}|\partial_x^l F(x,i)|
+\le \frac{2}{(l+1)(l+2)}(2\pi)^l\, i^{2}\;+\;B_l\,(2\pi)^l\, i.
+\]
+Thus the leading constant equals $2/[(l+1)(l+2)]$ with a linear remainder term.
+\end{remark}
+
+
+\begin{remark}[Uniform $M$-test blueprint]\label{rem:mtest-blueprint}
+On the real axis, $|F(x,i)|\le i^2$ and $|\partial_x^l F(x,i)|\le C_l(2\pi)^l i^2$. For the cutoff (here and below $r$ denotes the order of differentiation),
+\[
+\sup_{x\in K}\bigl|\partial_x^r \phi_\kappa(i/(x{+}1))\bigr|\ \ll_{r,K,\kappa}\ i^{\,r}\,e^{-c i}
+\]
+holds on every compact $K\subset(0,\infty)$ for some $c=c_{K,\kappa}>0$. By Leibniz' rule,
+\[
+\sup_{x\in K}\bigl|\partial_x^r\bigl(\phi_\kappa(i/(x{+}1))\,F(x,i)/i^\beta\bigr)\bigr|\ \ll_{r,K,\kappa}\ i^{\,r+\alpha}\,e^{-c i},
+\]
+with $\beta\in\{1,2\}$ and $\alpha\in\{0,1\}$, hence the series of derivatives is summable in $i$. The Weierstrass $M$-test yields local uniform convergence of all derivative series and thus $C^\infty$-regularity.
+\end{remark}
+
+\begin{lemma}[Local uniform convergence implies smoothness]\label{lem:local_uniform_smooth}
+Let $(h_i)_{i\ge2}$ be a sequence of $C^\infty$ functions on $(0,\infty)$. If for every compact $K\subset(0,\infty)$ and every $j\ge0$ the series $\sum_{i\ge2}\partial_x^j h_i$ converges uniformly on $K$, then $H=\sum_{i\ge2} h_i$ defines a $C^\infty$ function on $(0,\infty)$ and derivatives may be taken termwise on compacts.
+\end{lemma}
+
+\begin{proposition}[Properties of $\mathcal{P}_{\tau}$]
+The function $\mathcal{P}_{\tau}(x;\kappa)$ is of class $C^\infty$ on $(0,\infty)$. For any integer $n\ge2$,
+\[
+\lim_{\kappa\to\infty} \mathcal{P}_{\tau}(n; \kappa) = \tau(n)-2,
+\]
+which vanishes if and only if $n$ is prime.
+\end{proposition}
+\begin{proof}
+To establish $C^\infty$-regularity on $(0,\infty)$, it suffices to show that for any compact set $K\subset(0,\infty)$ and any integer $j\ge0$, the series of $j$-th derivatives converges uniformly on $K$. Let $h_i(x) = \phi_{\kappa}(i/(x+1)) F(x,i)/i^2$. By the Leibniz rule,
+\[
+\partial_x^j h_i(x) = \sum_{q=0}^j \binom{j}{q} \left( \partial_x^q \phi_{\kappa}\!\left(\frac{i}{x+1}\right) \right) \left( \partial_x^{j-q} \frac{F(x,i)}{i^2} \right).
+\]
+From Lemma~\ref{lem:cutoff-derivatives}, $|\partial_x^q \phi_{\kappa}(i/(x+1))| \le C_{q,K} \, i^q \, e^{-c_K i}$ for constants $C_{q,K}, c_K > 0$. From Proposition~\ref{prop:fejer-bounds}, the derivative $|\partial_x^{j-q} (F(x,i)/i^2)|$ is bounded by a constant, say $D_{j-q}$. Combining these gives a uniform majorant on $K$:
+\[
+\sup_{x\in K} |\partial_x^j h_i(x)| \le \sum_{q=0}^j \binom{j}{q} (C_{q,K} \, i^q \, e^{-c_K i}) D_{j-q} \le M_{j,K} \, i^{j} \, e^{-c_K i}.
+\]
+This majorant is summable over $i$ for any fixed $j$. By the Weierstrass M-test, each derivative series converges uniformly on $K$, which implies that $\mathcal{P}_{\tau}$ is a $C^\infty$ function.
+
+For the integer limit, if $n\in\mathbb Z$, Proposition~\ref{prop:fejer-properties} gives $F(n,i)/i^2 = \mathbf{1}_{i\mid n}$. The series becomes a finite sum:
+\[
+\mathcal{P}_{\tau}(n;\kappa)=\sum_{\substack{d\mid n\\ d\ge2}} \phi_{\kappa}\!\Bigl(\frac{d}{n+1}\Bigr)-1.
+\]
+As $\kappa\to\infty$, $\phi_{\kappa}(u)\to\mathbf 1_{u<1}$. Since $d/(n+1)<1$ for any divisor $d$ of $n$, the limit is $\#\{d\mid n: d\ge2\}-1 = \tau(n)-2$.
+\end{proof}
+
+\begin{definition}[Zero terminology]\label{def:zero-terminology}
+For a prime $p$, a \emph{companion zero at $p$} is any real zero $x\neq p$ of a smooth prime indicator with $|x-p|<1$. A family of zeros $x_p^{(\pm)}(\kappa)$ parameterized by the steepness $\kappa$ is called a \emph{prime-zero approximant} if $x_p^{(\pm)}(\kappa)\to p$ as $\kappa\to\infty$.
+In the present setting, $x=p$ is not a zero of the smooth indicators $\mathcal P_\tau(\cdot;\kappa)$ or $\mathcal P_\sigma(\cdot;\kappa)$ for any finite $\kappa$; the integer zero at $p$ belongs only to the sharp-cutoff indicator $\mathcal P$.
+Conjecture~\ref{conj:companion-zeros} concerns two approximants flanking $p$ for $\mathcal P_\tau$, whereas Conjecture~\ref{conj:Psigma-companions} states an asymmetric pair for $\mathcal P_\sigma$ (left approximant; right companion at a $\kappa$-independent distance). The terminology is used consistently below without further repetition.
+\end{definition}
+
+\begin{conjecture}[Companion zeros near odd primes]\label{conj:companion-zeros}
+For each odd prime $p\ge 5$, it is conjectured that there exist $\kappa_0(p)\ge 1$ and $\varepsilon_p>0$ such that, for all $\kappa\ge \kappa_0(p)$, the function $\mathcal P_\tau(\cdot;\kappa)$ has exactly two real zeros in $(p-\varepsilon_p,p+\varepsilon_p)$, one in $(p-\varepsilon_p,p)$ and one in $(p,p+\varepsilon_p)$. The existence, simplicity and the scale $\asymp\mathrm e^{-\kappa/(p+1)}$ of two such zeros are proved for every odd prime $p$ in Corollary~\ref{cor:Ptau-flank}; the conjectural part is the absence of further zeros. For $p=3$ this uniqueness fails, see Remark~\ref{rem:Ptau-p3}.
+\end{conjecture}
+
+As a numerical illustration of Conjecture~\ref{conj:companion-zeros}, 
+Figure~\ref{fig:PtauCompanions} plots $\mathcal P_\tau(x;\kappa)$ on $[2,8]$ for 
+$\kappa\in\{2,5,10,100\}$; the pair of real zeros flanking each odd prime emerges and tightens 
+with~$\kappa$, while the central value at $x=p$ remains negative for finite~$\kappa$.
+
+% remark: The quantitative local behavior is covered by Lemma~\ref{lem:Ptau-local-lb} and its corollary.
+
+\begin{lemma}[Local quadratic lower bound for $\mathcal P_\tau$ at an odd prime]\label{lem:Ptau-local-lb}
+Let $p\ge 3$ be prime, $\kappa\ge1$, and $t:=x-p$ with $|t|\le\tfrac12$. Then
+\[
+\mathcal P_\tau(x;\kappa)\;=\;-\delta_p^{(\tau)}(\kappa)\;+\;L_p(\kappa)\,t\;+\;B_p(\kappa)\,t^2\;+\;R_p(t;\kappa),
+\]
+where $\delta_p^{(\tau)}(\kappa):=1-\phi_\kappa\bigl(\tfrac{p}{p+1}\bigr)=\bigl(1+\mathrm e^{2\kappa/(p+1)}\bigr)^{-1}$, $L_p(\kappa):=\partial_x\mathcal P_\tau(p;\kappa)=\frac{p}{(p+1)^2}\cdot\frac{\kappa}{2}\,\mathrm{sech}^2\!\bigl(\frac{\kappa}{p+1}\bigr)\le\frac{2p\,\kappa}{(p+1)^2}\,\mathrm e^{-2\kappa/(p+1)}$, $B_p(\kappa):=\tfrac12\,\partial_x^2\mathcal P_\tau(p;\kappa)$, and $|R_p(t;\kappa)|\le C_p\,\kappa\,|t|^3$ with $C_p$ depending only on $p$; the proof establishes the stronger bound $\sup_{|x-p|\le1/2}|\partial_x^3\mathcal P_\tau(x;\kappa)|\le 6C_p\kappa$, which is what Corollary~\ref{cor:Ptau-flank} uses.
+As $\kappa\to\infty$,
+\[
+B_p(\kappa)\ \longrightarrow\ B_p^{(\infty)}
+=\sum_{\substack{2\le i\le p\\ i\neq p}}\frac{\pi^2}{i^2\sin^2(\pi p/i)}
++\frac{1}{2}\,\frac{\pi^2}{(p+1)^2\sin^2\!\bigl(\pi/(p+1)\bigr)}
+-\frac{\pi^2}{3}\Bigl(1-\frac{1}{p^2}\Bigr),
+\]
+and $B_p^{(\infty)}>0$. In particular,
+\[
+B_p^{(\infty)} \;\ge\; \frac{\pi^2}{4} \;+\; \sum_{i=3}^{p-1}\frac{\pi^2}{i^2} \;+\; \frac12 \;-\; \frac{\pi^2}{3}\Bigl(1-\frac{1}{p^2}\Bigr),
+\]
+For $p=3$ this lower bound equals $\frac12-\frac{5\pi^2}{108}>0$, while the exact value is $B_3^{(\infty)}=\frac{7\pi^2}{432}$.
+\end{lemma}
+
+\begin{proof}
+Set $t=x-p$. Since each $F(\cdot,i)$ and $\phi_\kappa$ is $C^\infty$ and the derivative series converge locally uniformly (see the proof of the $C^\infty$-regularity of $\mathcal P_\tau$), $\mathcal P_\tau$ may be differentiated termwise.
+
+\emph{Constant and linear term.} At $x=p$ one has $F(p,i)/i^2=\mathbf 1_{i\mid p}$ and $\partial_xF(p,i)=0$ for all $i$ (Proposition~\ref{prop:C1}). Hence $\mathcal P_\tau(p;\kappa)=\phi_\kappa(\tfrac{p}{p+1})-1=-\delta_p^{(\tau)}(\kappa)$, and only the derivative of the cutoff at $i=p$ contributes to the first derivative:
+\[
+L_p(\kappa)=\partial_x\phi_\kappa\!\Bigl(\frac{p}{x+1}\Bigr)\Big|_{x=p}=-\frac{p}{(p+1)^2}\,\phi_\kappa'\!\Bigl(\frac{p}{p+1}\Bigr)=\frac{p}{(p+1)^2}\cdot\frac{\kappa}{2}\,\mathrm{sech}^2\!\Bigl(\frac{\kappa}{p+1}\Bigr).
+\]
+This linear term is positive for finite $\kappa$ but exponentially small. For the quadratic coefficient the indices are treated separately.
+
+\emph{(i) $2\le i\le p-1$.} Because $\sin(\pi p/i)\neq 0$,
+\[
+F(x,i)=\frac{\sin^2(\pi x)}{\sin^2(\pi x/i)}=\frac{\pi^2}{\sin^2(\pi p/i)}\,t^2+O(t^3),
+\]
+and therefore
+\[
+\phi_\kappa\!\Bigl(\frac{i}{x+1}\Bigr)\frac{F(x,i)}{i^2}
+=\Bigl(\phi_\kappa\!\Bigl(\tfrac{i}{p+1}\Bigr)+O(t)\Bigr)\Bigl(\frac{\pi^2}{i^2\sin^2(\pi p/i)}\,t^2+O(t^3)\Bigr).
+\]
+Since $\phi_\kappa(\tfrac{i}{p+1})\to 1$ as $\kappa\to\infty$, the quadratic coefficient tends to $\pi^2/(i^2\sin^2(\pi p/i))$.
+
+\emph{(ii) $i=p$.} With $x=p+t$,
+\[
+\frac{\sin(\pi x)}{\sin(\pi x/p)}=p\Bigl(1-\alpha_p(\pi t)^2\Bigr)+O(t^4),\qquad
+\alpha_p=\frac{1}{6}\Bigl(1-\frac{1}{p^2}\Bigr),
+\]
+hence
+\[
+\frac{F(x,p)}{p^2}=1-2\alpha_p(\pi t)^2+O(t^4),
+\]
+and the quadratic coefficient equals $-\,\dfrac{\pi^2}{3}\Bigl(1-\dfrac{1}{p^2}\Bigr)$.
+
+\emph{(iii) $i=p+1$.} Here $u(x)=\tfrac{p+1}{x+1}=1-\tfrac{t}{p+1}+O(t^2)$ and
+\[
+\phi_\kappa\!\Bigl(\frac{p+1}{x+1}\Bigr)=\frac12+O(t) \quad (\text{for fixed }\kappa).
+\]
+Since
+\[
+\frac{F(x,p+1)}{(p+1)^2}=\frac{\pi^2}{(p+1)^2\sin^2(\pi/(p+1))}\,t^2+O(t^3),
+\]
+the product has quadratic coefficient \emph{exactly}
+\[
+\frac{1}{2}\cdot\frac{\pi^2}{(p+1)^2\sin^2(\pi/(p+1))},
+\]
+because the $O(t)$ part of $\phi_\kappa$ multiplies a function without linear term.
+
+\emph{(iv) $i\ge p+2$.} Here $F(p,i)=\partial_xF(p,i)=0$, so the quadratic coefficient of the $i$-th term is $\phi_\kappa(\tfrac{i}{p+1})\,\pi^2/(i^2\sin^2(\pi p/i))$. Since $\sin(\pi p/i)\ge 2\min\{p,i-p\}/i\ge 4/i$ and $\phi_\kappa(\tfrac{i}{p+1})\le \mathrm e^{-2\kappa(i-p-1)/(p+1)}$, these coefficients sum to $O_p(\mathrm e^{-2\kappa/(p+1)})$.
+
+Summing (i)–(iv) and subtracting the constant $1$ in the definition of $\mathcal P_\tau$ yields $B_p^{(\infty)}$ as stated; the contribution of the derivatives of the cutoff at $i=p$ is $O(\kappa^2\mathrm e^{-2\kappa/(p+1)})$ and vanishes in the limit. The lower bound follows from $\sin^2\theta\le 1$, from $\sin(\pi p/2)=\pm 1$ for odd $p$, and from $(p+1)\sin(\pi/(p+1))\le\pi$ for the index $i=p+1$; it increases with $p$ and is already positive for $p=3$, where it equals $\frac{\pi^2}{4}+\frac12-\frac{8\pi^2}{27}=\frac12-\frac{5\pi^2}{108}$. The exact value for $p=3$ is
+\(
+\frac{\pi^2}{4}+\frac{\pi^2}{16}-\frac{8\pi^2}{27}=\frac{7\pi^2}{432}.
+\)
+
+\emph{Remainder.} For $\kappa\ge1$ and $|t|\le\tfrac12$ one has $|\partial_x^3\mathcal P_\tau(x;\kappa)|\le 6C_p\kappa$. Indeed, the indices $i\ne p+1$ contribute $O_p(1)$ uniformly in $\kappa\ge1$, while for $i=p+1$ one has $\kappa(u-1)=-\kappa t/(x+1)$ and $F(x,p+1)=O(t^2)$, which yields a contribution $O_p(\kappa)$; this is the three-group estimate in the proof of Lemma~\ref{lem:uniform-local-sigma} below, with the weight $i^{-2}$ in place of $i^{-1}$. Taylor's theorem gives $|R_p(t;\kappa)|\le C_p\kappa|t|^3$. The growth in $\kappa$ is genuine: numerically, $\sup_{|x-5|\le0.3}|\partial_x^3\mathcal P_\tau(x;\kappa)|$ increases from about $10$ at $\kappa=10$ to about $49$ at $\kappa=80$.
+\end{proof}
+
+
+\begin{corollary}[Quantitative flank zeros near $p$]\label{cor:Ptau-flank}
+Let $p\ge3$ be prime. There is $\kappa_0(p)\ge1$ such that for all $\kappa\ge \kappa_0(p)$ the function $\mathcal P_\tau(\cdot;\kappa)$ has exactly two zeros in $|x-p|\le 2\sqrt{\delta_p^{(\tau)}(\kappa)/B_p(\kappa)}$, one on each side of $p$; both are simple, with distances
+\[
+|x-p|\;=\;\sqrt{\frac{\delta_p^{(\tau)}(\kappa)}{B_p(\kappa)}}\;+\;O_p\bigl(\kappa\,\delta_p^{(\tau)}(\kappa)\bigr)
+\;\asymp\; \mathrm e^{-\kappa/(p+1)}.
+\]
+The error term cannot be replaced by $O(\delta_p^{(\tau)}(\kappa))$: it contains the shift $-L_p(\kappa)/(2B_p(\kappa))$ of size $\asymp\kappa\,\delta_p^{(\tau)}(\kappa)$. Numerically, for $p=5$ the deviation is about $0.062\,\kappa\,\delta_5^{(\tau)}(\kappa)$ at $\kappa=40$ and at $\kappa=80$.
+\end{corollary}
+\begin{proof}
+Write $\delta=\delta_p^{(\tau)}(\kappa)$, $B=B_p(\kappa)$, $L=L_p(\kappa)$ and $\tau_0=\sqrt{\delta/B}$; for large $\kappa$ one has $B\ge\frac12B_p^{(\infty)}>0$. On $|t|\le2\tau_0$ Lemma~\ref{lem:Ptau-local-lb} gives $\mathcal P_\tau=-\delta+Bt^2+E(t)$ with $|E(t)|\le 2|L|\tau_0+8C_p\kappa\tau_0^3=O_p(\kappa\,\delta^{3/2})$, because $L=O(\kappa\delta)$. On $|t|\le\tau_0/2$ this gives $\mathcal P_\tau\le-\frac34\delta+O_p(\kappa\delta^{3/2})<0$. On $\tau_0/2\le|t|\le2\tau_0$ the derivative $\partial_x\mathcal P_\tau=L+2Bt+O_p(\kappa t^2)$ has the sign of $t$, since $2B|t|\ge B\tau_0\asymp\sqrt\delta$ dominates $O_p(\kappa\delta)$. Finally, $\mathcal P_\tau$ changes sign between $|t|=\tau_0-A\kappa\delta$ and $|t|=\tau_0+A\kappa\delta$ for a suitable $A=A_p$, since $B(\tau_0\pm A\kappa\delta)^2-\delta=\pm2A\kappa\sqrt{B}\,\delta^{3/2}+O(\kappa^2\delta^2)$ dominates $E$. This gives exactly one simple zero on each side at the stated distance.
+\end{proof}
+
+\begin{remark}[The prime $p=3$]\label{rem:Ptau-p3}
+In $B_p^{(\infty)}$ the index $i=p+1$ enters with the weight $\phi_\kappa(1)=\frac12$. At distances $|x-p|\gg1/\kappa$ this weight is close to $0$ on the left of $p$ and close to $1$ on the right, so that the one-sided quadratic coefficients are
+\[
+B_p^{\mathrm{left}}=\sum_{i=2}^{p-1}\frac{\pi^2}{i^2\sin^2(\pi p/i)}-\frac{\pi^2}{3}\Bigl(1-\frac1{p^2}\Bigr)
+\quad\text{and}\quad
+B_p^{\mathrm{left}}+\frac{\pi^2}{(p+1)^2\sin^2(\pi/(p+1))}.
+\]
+For $p\ge5$ both are positive, since $B_p^{\mathrm{left}}\ge\frac{\pi^2}{4}+\sum_{i=3}^{p-1}\frac{\pi^2}{i^2}-\frac{\pi^2}{3}>0$. For $p=3$, however, $B_3^{\mathrm{left}}=\frac{\pi^2}{4}-\frac{8\pi^2}{27}=-\frac{5\pi^2}{108}<0$. Consequently, for large $\kappa$ the function $\mathcal P_\tau(\cdot;\kappa)$ has an additional real zero to the left of $3$ at distance $\asymp1/\kappa$ (numerically at $3-0.0235$ for $\kappa=40$ and at $3-0.0124$ for $\kappa=80$), and it is negative on $[2.01,\,2.97]$ for $\kappa\in\{40,80,100\}$ (grid of step $0.005$).
+\end{remark}
+
+
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.9\textwidth]{plot_companion_zeros.pdf}
+\caption{Companion zeros of the smooth divisor–counting analogue $\mathcal{P}_{\tau}(x;\kappa)$
+on $[2,8]$ for $\kappa\in\{2,5,10,100\}$. Vertical dashed lines mark the odd primes $3,5,7$.
+Consistent with Corollary~\ref{cor:Ptau-flank}, for larger $\kappa$ a pair of real zeros
+appears on either side of each odd prime and moves toward $p$ (for $p=3$ an additional left zero at distance $\asymp1/\kappa$ occurs, see Remark~\ref{rem:Ptau-p3}); the value at $x=p$
+is strictly negative for finite $\kappa$ and decays like $\mathrm e^{-2\kappa/(p+1)}$.}
+\label{fig:PtauCompanions}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.9\textwidth]{plot_P_tau.pdf}
+\caption{Numerical profile of $\mathcal{P}_{\tau}(x; \kappa)$ (default $\kappa=1000$ unless stated otherwise).
+The function is $C^\infty$ and approaches $0$ at all integer primes as $\kappa\to\infty$. The local shape near odd primes is consistent with Conjecture~\ref{conj:companion-zeros}.}
+\label{fig:P_tau}
+\end{figure}
+
+\FloatBarrier
+
+% ---------------------------------------------------------------------------

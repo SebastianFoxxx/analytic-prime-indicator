@@ -1,0 +1,335 @@
+\appendix
+
+\section{Illustrative prime-counting sums: constant-$C$ baseline and non-accumulative $H$-variant}
+
+\noindent\textit{This appendix is illustrative. The constructions are not intended as practical prime-counting algorithms but serve to demonstrate how the integer prime-zero property of the smooth indicators can be utilized within summation formulas.}
+
+\subsection{Construction Based on $\mathcal{P}_{\tau}$}
+The construction is illustrative and not intended to compete with standard prime-counting methods.
+The smooth analogue $\mathcal{P}_{\tau}(x)$ is used to construct related number-theoretic functions, rather than $\mathcal{P}(x)$.
+The construction yields a prime–zero property for all integer inputs: for any integer $n \ge 2$, the limit $\lim_{\kappa\to\infty} \mathcal{P}_{\tau}(n;\kappa)=\tau(n)-2$ vanishes if and only if $n$ is prime.
+This addresses the limitation that $\mathcal{P}(x)$ does not vanish at $p=2$.
+This property allows a direct construction of a counting sum. The use of absolute values removes sign cancellations: for finite $\kappa$ the sign of $\mathcal{P}_{\tau}(x;\kappa)$ at non-integer $x$ is not controlled, whereas the intended feature of the summand is non-vanishing at non-primes.
+
+\begin{definition}[Constant-threshold baseline]
+An approximation for $\pi(x)$ for integers $x\ge2$ can be constructed via the sum
+\begin{equation}\label{eq:pi_P_tau}
+\pi_{\mathcal{P}_\tau}(x; C, \kappa) = \sum_{n=2}^{\lfloor x \rfloor} \left(1 - \frac{|\mathcal{P}_{\tau}(n; \kappa)|}{|\mathcal{P}_{\tau}(n; \kappa)| + C}\right),
+\end{equation}
+where $C$ is a small, positive constant (e.g., $C=0.001$) that serves as a fixed threshold.
+The sum starts at $n=2$, the first prime, avoiding any ad-hoc adjustments.
+\end{definition}
+
+\begin{remark}[Choice of the threshold $C$]
+In the limit $\kappa\to\infty$, a fixed $C$ controls the maximal per-term deviation for composites by $C/(1+C)$; for finite $\kappa$ the corresponding bound is $C/(\max\{1-\Delta_\kappa(x),0\}+C)$. For targets at the $10^{-3}$–level, $C=10^{-3}$ suffices. If an adaptive choice is preferred, setting $C=C(x):=\min\{10^{-3},\,(\log x)^{-2}\}$ preserves the qualitative behavior while reducing cumulative growth of the positive bias as $x$ increases.
+\end{remark}
+
+The behavior of the summand is as follows for large steepness parameter $\kappa$:
+\begin{itemize}
+    \item For prime $n$, $\mathcal{P}_{\tau}(n; \kappa)$ is close to $0$, so the summand is close to $1$.
+    \item For composite $n$, $\mathcal{P}_{\tau}(n; \kappa)$ is close to $\tau(n)-2 \ge 1$, so the summand is close to $0$.
+\end{itemize}
+Consequently, for large $\kappa$ the summand in \eqref{eq:pi_P_tau} takes values close to $1$ at primes and close to $0$ at composites.
+
+\subsection{Analysis of the Term-wise Error}
+The deviation of this formula from the true value of $\pi(x)$ arises from two sources: the finite value of the steepness parameter $\kappa$, and the non-zero contribution of composite numbers controlled by the threshold $C$. For any finite $\kappa$, $\mathcal{P}_{\tau}(n; \kappa)$ deviates slightly from the integer limit $\tau(n)-2$.
+
+Focusing on the systematic error from composite numbers in the ideal limit $\kappa\to\infty$, an upper bound for the error contribution of a single term can be established.
+
+\begin{proposition}[Bounded Term-wise Error for the $\mathcal{P}_{\tau}$-based sum]
+For any composite integer $n \ge 4$, the error contribution $E(n)$ is strictly positive and at most $1$. In the limit $\kappa\to\infty$, it is bounded above by
+\[ E_{max} = \frac{C}{1+C}. \]
+\end{proposition}
+
+\begin{proof}
+For a composite number $n$, the error contribution from the corresponding term in the sum is:
+\[ E(n) = 1 - \frac{|\mathcal{P}_{\tau}(n; \kappa)|}{|\mathcal{P}_{\tau}(n; \kappa)| + C} = \frac{C}{|\mathcal{P}_{\tau}(n; \kappa)| + C}. \]
+In the limit $\kappa\to\infty$, this becomes $E(n) = \frac{C}{|\tau(n)-2| + C}$.
+The error is maximized when the denominator is minimized. This occurs when $|\tau(n)-2|$ is minimal. For any composite number $n$, the number of divisors $\tau(n)$ is at least 3 (e.g., for $n=p^2$). The smallest possible value for `n` is $4$, where $\tau(4)=3$. Thus, the minimum positive value of $|\tau(n)-2|$ for any composite $n$ is $|\tau(4)-2| = |3-2|=1$.
+Therefore, the maximum possible error for any single composite term is bounded by:
+\[ E_{max} = \frac{C}{1+C}. \]
+For a choice of $C=0.001$, the maximum error for any single term is approximately $0.000999$.
+\end{proof}
+
+\subsection{Asymptotic Behavior of the Total Error}
+Let $E(x;C,\kappa):=\pi_{\mathcal P_\tau}(x; C, \kappa) - \pi(x)$ and write the single-term deviation for composites as
+\[
+0< E(n)=1-\frac{|\mathcal P_\tau(n;\kappa)|}{|\mathcal P_\tau(n;\kappa)|+C}
+=\frac{C}{|\mathcal P_\tau(n;\kappa)|+C}\qquad(n\ge4\ \text{composite}).
+\]
+(A) In the idealized limit $\kappa\to\infty$, one has $|\mathcal P_\tau(n;\infty)|=\tau(n)-2\ge1$, hence $E(n)\le \dfrac{C}{1+C}$ and
+\[
+0\le E(x;C,\infty)\ \le\ \sum_{\substack{4\le n\le x\\ n\ \mathrm{composite}}}\frac{C}{1+C}
+\ =\ \frac{C}{1+C}\,\bigl(\lfloor x\rfloor-\pi(x)-1\bigr)
+\ =\ O(x).
+\]
+(B) For finite $\kappa$, the same reasoning yields bounds in terms of the uniform deviation
+\[
+\Delta_\kappa(x):=\max_{2\le n\le \lfloor x\rfloor}\Bigl|\mathcal P_\tau(n;\kappa)-\bigl(\tau(n)-2\bigr)\Bigr|,
+\]
+since $E(n)\le \dfrac{C}{\max\{1-\Delta_\kappa(x),0\}+C}$ for composites $n\le x$. Any effective control of $\Delta_\kappa(x)$ immediately transfers to a global bound for $E(x;C,\kappa)$.
+
+\begin{proposition}[Global absolute deviation bounds for $\pi_{\mathcal P_\tau}$]
+Let $C>0$ be fixed and $x\ge 2$.
+\begin{itemize}
+\item[(i)] For any $\kappa\in(0,\infty)$,
+\[
+\Bigl|\pi_{\mathcal P_\tau}(x;C,\kappa)-\pi(x)\Bigr|
+\ \le\ \sum_{\substack{2\le n\le \lfloor x\rfloor\\ n\ \mathrm{composite}}} 1\;+\;\sum_{\substack{2\le n\le \lfloor x\rfloor\\ n\ \mathrm{prime}}} 1
+\ =\ \lfloor x\rfloor-1
+\ =\ O(x).
+\]
+Sharper $\kappa$-dependent bounds follow from the uniform deviation $\Delta_\kappa(x)$ introduced above.
+\item[(ii)] In the idealized limit $\kappa\to\infty$,
+\[
+0\ \le\ \pi_{\mathcal P_\tau}(x;C,\infty)-\pi(x)
+\ \le\ \frac{C}{1+C}\,\bigl(\lfloor x\rfloor-\pi(x)-1\bigr)
+\ =\ O(x).
+\]
+\end{itemize}
+\end{proposition}
+
+\begin{proof}
+Write $S(n)=1-\frac{|\mathcal P_\tau(n;\kappa)|}{|\mathcal P_\tau(n;\kappa)|+C}\in(0,1]$. Then
+\[
+\pi_{\mathcal P_\tau}(x;C,\kappa)-\pi(x)
+=\sum_{\substack{n\le \lfloor x\rfloor\\ n\ \mathrm{comp}}}\!S(n)\;-\!\sum_{\substack{n\le \lfloor x\rfloor\\ n\ \mathrm{prime}}}\!\bigl(1-S(n)\bigr).
+\]
+By the triangle inequality and $S(n)\le 1$, one obtains (i). For (ii), as $\kappa\to\infty$, $S(n)\to 1$ for primes and $S(n)\to \frac{C}{\tau(n)-2+C}\le \frac{C}{1+C}$ for composites (since $\tau(n)-2\ge 1$). Hence the negative term vanishes and the positive term is bounded by the stated multiple of the number of composites up to $x$.
+\end{proof}
+
+This confirms the illustrative nature of the construction and explains why asymptotically sharp prime counting is not expected from \eqref{eq:pi_P_tau}. The formula is intended for illustrative and pedagogical purposes rather than for competition with classical prime-counting methods.
+
+\subsection{A Variant with Summable Composite Leakage (H-Variant)}
+
+To address the linear error accumulation from composite numbers in the baseline model, a variant is constructed where this leakage is bounded by a summable series. This property does not eliminate the error accumulation from primes (the "prime deficit"), which still grows with $\pi(x)$. Let $g(n):=|\mathcal P_\tau(n;\kappa(n))|$, where the steepness $\kappa(n):=\alpha(n+1)$ now depends on the input $n$ with a fixed rate $\alpha>0$. A dynamic threshold $\varepsilon(n):=(n+1)^{-\gamma}$ with $\gamma>1$ is introduced. The gating term is defined as
+\[
+a_n(\alpha,\gamma)\ :=\ \frac{\varepsilon(n)}{g(n)+\varepsilon(n)}\in(0,1],
+\]
+and the partial counting sum
+\begin{equation}\label{eq:pi_H}
+\pi_H(x;\alpha,\gamma)\ :=\ \sum_{n=2}^{\lfloor x\rfloor} a_n(\alpha,\gamma).
+\end{equation}
+
+\noindent\emph{Terminology.} The term “non-accumulative” refers exclusively to the composite leakage
+\(
+\sum_{n\ \mathrm{composite}} \varepsilon(n)/(g(n)+\varepsilon(n)),
+\)
+which is summable for $\gamma>1$. The prime deficit
+\(
+\sum_{p\le x} B(\alpha)/(B(\alpha)+\varepsilon(p))
+\)
+accumulates with $\pi(x)$.
+
+For any prime $p$, the argument of the cutoff function $\phi_{\kappa(p)}$ becomes independent of $p$. With $\kappa(p)=\alpha(p+1)$, the term $u-1$ inside the hyperbolic tangent evaluates to $\frac{p}{p+1}-1 = -\frac{1}{p+1}$, which yields $\kappa(p)(u-1)=-\alpha$. Consequently, $g(p)$ simplifies to a constant that depends only on $\alpha$:
+\[
+g(p) = \left|\phi_{\kappa(p)}\!\left(\frac{p}{p+1}\right)-1\right| = \left|\frac{1-\tanh(-\alpha)}{2}-1\right| = \frac{1-\tanh(\alpha)}{2} = \frac{1}{e^{2\alpha}+1}.
+\]
+This constant is denoted by $B(\alpha)$. The gating term $a_p$ is thus not approximately 1, but rather a specific value determined by the competition between the prime residual $B(\alpha)$ and the threshold $\varepsilon(p)$. The mechanism is effective only if $\varepsilon(p) \gg B(\alpha)$, ensuring $a_p$ is close to 1. For composite $n$, $g(n)$ is expected to be of order 1.
+
+\paragraph*{Finite-range admissibility for the non-accumulative $H$-variant}
+Let $\kappa(n)=\alpha(n+1)$ with $\alpha>0$, $\varepsilon(n)=(n+1)^{-\gamma}$ with $\gamma>1$, and
+\[
+t_n=\frac{\varepsilon(n)}{\,|\mathcal P_\tau(n;\kappa(n))|+\varepsilon(n)}\,.
+\]
+Define $B(\alpha):=\dfrac{1-\tanh\alpha}{2}=\dfrac{1}{e^{2\alpha}+1}$.
+
+\begin{lemma}[Prime residual at primes]
+For every prime $p$ (including $p=2$),
+\[
+\bigl|\mathcal P_\tau(p;\kappa(p))\bigr| \;=\; B(\alpha)=\frac{1}{e^{2\alpha}+1}.
+\]
+\end{lemma}
+
+\begin{lemma}[Uniform composite gap]\label{lem:uniform-composite-gap}
+Let $\kappa(n)=\alpha(n+1)$ with $\alpha>0$. For every composite integer $n\ge 4$,
+\[
+\mathcal P_\tau(n;\kappa(n))\;\ge\; 1-2\,e^{-2\alpha}\;=:\;c_\alpha.
+\]
+In particular $c_\alpha>0$ holds as soon as $\alpha>\tfrac12\log 2$.
+
+\begin{proof}
+For $n\ge 2$,
+\[
+\mathcal P_\tau(n;\kappa(n))=\sum_{\substack{d\mid n\\ d\ge 2}}\phi_{\kappa(n)}\!\Bigl(\frac{d}{n+1}\Bigr)-1.
+\]
+For any divisor $d\le n$,
+\[
+\kappa(n)\Bigl(\frac{d}{n+1}-1\Bigr)=\alpha\,(d-n-1)\le -\alpha,
+\]
+hence
+\[
+\phi_{\kappa(n)}\!\Bigl(\tfrac{d}{n+1}\Bigr)
+=\frac{1-\tanh\!\bigl(\alpha(d-n-1)\bigr)}{2}
+=\frac{1+\tanh\!\bigl(\alpha(n+1-d)\bigr)}{2}
+\ \ge\ 1-e^{-2\alpha},
+\]
+since $\tanh t\ge 1-2e^{-2t}$ for $t\ge 0$. Because $n$ is composite, there exists a proper divisor $d$ with $2\le d\le n/2$. For this $d$ and for $d=n$ one has $n+1-d\ge 1$, hence the displayed lower bound applies to both indices. Therefore the sum over $d\ge 2$ contains at least two terms not smaller than $1-e^{-2\alpha}$, and
+\[
+\mathcal P_\tau(n;\kappa(n))
+\ \ge\ 2(1-e^{-2\alpha})-1
+\ =\ 1-2e^{-2\alpha}.
+\]
+\end{proof}
+\end{lemma}
+
+
+\begin{corollary}[Finite-range admissibility]
+If $\varepsilon(X)\ge \lambda\,B(\alpha)$ for some $\lambda\ge 1$, then $t_p\ge \dfrac{\lambda}{1+\lambda}$ for all primes $p\le X$.
+For $\varepsilon(n)=(n+1)^{-\gamma}$ this is ensured by
+\[
+\gamma \;\le\; \frac{\log\!\bigl(1/B(\alpha)\bigr)-\log \lambda}{\log(X+1)}
+ \;=\; \frac{\log\!\bigl(e^{2\alpha}+1\bigr)-\log \lambda}{\log(X+1)}.
+\]
+\end{corollary}
+
+\paragraph*{Parameter choice for the figure}
+With $\alpha=18.5$, the prime residual is $B(18.5)=(e^{37}+1)^{-1}$. For the range $X=50$, the condition $\varepsilon(X) \ge \lambda B(\alpha)$ with $\lambda=100$ requires $(51)^{-\gamma} \ge 100 \cdot (e^{37}+1)^{-1}$. This yields an upper bound on $\gamma$:
+\[
+\gamma \le \frac{\log(e^{37}+1) - \log(100)}{\log(51)} \approx \frac{37.00 - 4.61}{3.93} \approx 8.24.
+\]
+Here $\log$ denotes the natural logarithm. The choice $\gamma=5$ is admissible under this constraint and ensures $t_p \ge \lambda/(1+\lambda) = 100/101$ for all primes $p\le 50$.
+
+\begin{proposition}[Error decomposition for the H-variant]
+The absolute error satisfies
+\[
+\bigl| \pi_H(x;\alpha,\gamma) - \pi(x) \bigr|
+\;\le\; E_c(x) + E_p(x),
+\qquad
+E_c(x):=\sum_{\substack{n\le \lfloor x\rfloor \\ n\ \mathrm{composite}}}\frac{\varepsilon(n)}{g(n)+\varepsilon(n)},
+\quad
+E_p(x):=\sum_{p\le x}\frac{B(\alpha)}{B(\alpha)+\varepsilon(p)}.
+\]
+With $g(n):=\bigl|\mathcal P_\tau(n;\kappa(n))\bigr|$ and Lemma~\ref{lem:uniform-composite-gap},
+\[
+g(n)\;\ge\; c_\alpha:=1-2e^{-2\alpha}\qquad(n\ \mathrm{composite}),
+\]
+and therefore, for every $\gamma>1$,
+\[
+E_c(x)\ \le\ \frac{1}{c_\alpha}\sum_{n=4}^{\infty}(n+1)^{-\gamma}\ <\ \frac{\zeta(\gamma)}{c_\alpha}\,.
+\]
+In particular, $E_c(x)$ is uniformly bounded in $x$ provided $\alpha>\tfrac12\log 2$.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+The total error is the sum over composites (leakage) minus the sum of deviations from 1 at primes (deficit). The absolute error is bounded by the sum of their magnitudes via the triangle inequality.
+
+For the composite leakage $E_c(x)$, each term $a_n$ is bounded above by $\varepsilon(n)/c_{\alpha}$. Since the series $\sum \varepsilon(n)$ converges for $\gamma>1$, the total leakage is bounded by a constant that does not grow with $x$.
+
+For the prime deficit $E_p(x)$, the deviation at each prime is $1-a_p = B(\alpha)/(B(\alpha)+\varepsilon(p))$. This term does not form a summable series over the primes. While each term is small for a suitable choice of parameters, their sum accumulates with $\pi(x)$. The "non-accumulative" property of the H-variant thus applies only to the error contribution from composite numbers.
+\end{proof}
+
+\begin{remark}[Quantitative separation on practical ranges]
+For every divisor $d\mid n$ with $d\le n$,
+\[
+\phi_{\kappa(n)}\!\Bigl(\frac{d}{n+1}\Bigr)\ \ge\ 1-e^{-2\alpha},
+\]
+hence Lemma~\ref{lem:uniform-composite-gap} gives the uniform bound
+$g(n)\ge c_\alpha=1-2e^{-2\alpha}$ for composites $n$. Consequently,
+$E_c(x)\le c_\alpha^{-1}\sum_{n\ge 4}(n+1)^{-\gamma}$ is non-accumulative for any $\gamma>1$ and every $\alpha>\tfrac12\log 2$.
+Numerically, the parameters have to respect the admissibility bound of the corollary above. For example, $(\alpha,\gamma)=(45,7)$ is admissible on $x\le10^4$ ($\gamma\le9.77$ for $\lambda=1$), and exact evaluation of the closed form $g(n)=\bigl|\sum_{d\mid n,\,d\ge2}\bigl(1+\mathrm e^{2\alpha(d-n-1)}\bigr)^{-1}-1\bigr|$ gives $\max_{x\le10^4}|\pi_H(x;45,7)-\pi(x)|\approx1.4\times10^{-5}$, while the constant-$C$ baseline shows a linear drift. The pair $(\alpha,\gamma)=(19,7)$ is \emph{not} admissible on this range ($\gamma\le4.13$): evaluated exactly, $\pi_H(10^4;19,7)\approx50.5$ instead of $\pi(10^4)=1229$, because $a_p\approx0$ for all but the smallest primes. A naive double-precision evaluation of $\tfrac12\bigl(1-\tanh(\kappa(u-1))\bigr)-1$ hides this, since the prime residual $B(19)\approx3\cdot10^{-17}$ lies below the machine precision and is rounded to $0$.
+\end{remark}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.9\textwidth]{plot_prime_counting.pdf}
+\caption{Comparison of two illustrative prime-counting sums on $0\le x\le 50$. The constant-threshold baseline uses $C=0.1$ and a fixed steepness $\kappa$, which produces a visible linear drift due to cumulative composite leakage. The non-accumulative $H$-variant uses $\kappa(n)=\alpha(n+1)$ and $\varepsilon(n)=(n+1)^{-\gamma}$ with $\alpha=18.5$ and $\gamma=5$, yielding a curve that visually coincides with the staircase of $\pi(x)$ on this range. Both constructions are illustrative; no asymptotic claims are made.}
+\label{fig:primecounting}
+\end{figure}
+\FloatBarrier
+
+
+\section{Reference implementation}\label{app:code}
+
+\noindent\textit{Algorithm for stable evaluation of $\mathcal{P}(x)$.}
+\begin{lstlisting}[language=Python]
+# Numerically stable O(sqrt(x)) evaluation of P(x) with explicit resonance guards (hardened).
+
+from math import sin, cos, pi, sqrt, ceil
+
+def P(x, eps=1e-12):
+    assert x > 0.0
+    N = ceil(sqrt(x))
+    S = 0.0
+
+    # Global tolerances
+    EPS_INT = eps
+    EPS_RES = 1e-6
+
+    # Integer detection
+    n = int(round(x))
+    near_int = abs(x - n) < EPS_INT
+
+    # Numerator via the shifted argument: sin^2(pi x) = sin^2(pi (x - n)), no large arguments
+    sx = sin(pi * (x - n))
+
+    def is_resonant(t, i):
+        # t ~ integer or sin(pi t) small -> potential denominator cancellation
+        return (abs(t - round(t)) < max(EPS_RES, 0.1 / i)) or (abs(sin(pi * t)) < EPS_RES)
+
+    for i in range(2, N + 1):
+        t = x / i
+        m = int(round(t))
+        delta = x - i * m  # Deviation from the nearest multiple of i (exact in floating point)
+
+        if is_resonant(t, i):
+            # --- Resonance detected: x/i is close to an integer ---
+            # Exact integer and exact divisibility handled purely in integer arithmetic
+            if near_int and (n % i == 0):
+                S += i * i    # Exact value F(n,i) = i^2 for divisors
+                continue
+
+            if abs(delta) <= 1e-4:
+                # Local even Taylor surrogate; relative remainder below 5e-16 in this window
+                alpha = (1.0 / 6.0) * (1.0 - 1.0 / (i * i))
+                S += i * i * (1.0 - 2.0 * alpha * (pi * delta) ** 2)
+            else:
+                # Shifted exact quotient: |sin(pi x)| = |sin(pi delta)|, |sin(pi x / i)| = |sin(pi delta / i)|
+                r = sin(pi * delta) / sin(pi * delta / i)
+                S += r * r
+        else:
+            denom = sin(pi * delta / i)  # = +-sin(pi x / i), evaluated without large arguments
+            S += (sx * sx) / (denom * denom)
+
+    return S / x
+\end{lstlisting}
+
+\paragraph*{Implementation notes: resonance guards and control flow}
+Note that Listing 1 serves as a conceptual illustration of the complete stabilization logic; the companion script organises comparable guards across a main function and a dedicated \texttt{fejer\_closed\_form\_term} helper and may use different thresholds. The routine separates indices into non-resonant and resonant regimes and applies the least sensitive representation in each case.
+
+\begin{itemize}
+\item \emph{Resonance detection.} For $t=x/i$ and $m=\mathrm{round}(t)$, a resonance is flagged if $\lvert t-m\rvert$ is small or $\lvert\sin(\pi t)\rvert$ is small. This captures proximity to the pole set $x\approx im$ where the denominator of $\sin(\pi x/i)$ is tiny.
+
+\item \emph{Exact divisors.} If $x$ is (numerically) an integer and $i\mid x$, the value $F(x,i)=i^2$ is returned, which avoids cancellation.
+
+\item \emph{Local $\delta$-switch near resonance.} Writing $x=im+\delta$, the local even expansion from Lemma~\ref{lem:resonance} yields
+\[
+\Bigl(\tfrac{\sin(\pi x)}{\sin(\pi x/i)}\Bigr)^{2}
+= i^{2}\bigl(1-2\alpha_i(\pi\delta)^{2}\bigr)+O\!\bigl(i^{2}(\pi\delta)^{4}\bigr),
+\qquad \alpha_i=\tfrac16\bigl(1-\tfrac{1}{i^{2}}\bigr).
+\]
+The code uses this quadratic truncation only for $\lvert\delta\rvert\le10^{-4}$. Numerically, the fourth-order remainder satisfies $|R_i^{(F)}(\delta)|\le 0.045\,i^2(\pi\delta)^4$ for $|\delta|\le i/4$, so the relative truncation error in this window is below $5\cdot10^{-16}$; no clamping is needed. A wider window is not advisable: with the threshold $|\delta|\le0.1$ the surrogate causes relative errors of about $4\cdot10^{-4}$ (e.g.\ near $x=5040$).
+
+\item \emph{Shifted exact quotient outside the local window.} If $\lvert\delta\rvert$ exceeds the local window, the identity
+\[
+F(x,i)=\frac{\sin^{2}(\pi\delta)}{\sin^{2}(\pi\delta/i)}
+\]
+is used, which is exact because $\sin(\pi x)=\pm\sin(\pi\delta)$ and $\sin(\pi x/i)=\pm\sin(\pi\delta/i)$. Since $\delta=x-im$ is computed without rounding error, no loss of significance occurs.
+
+\item \emph{Non-resonant path.} When no resonance is detected, the quotient-of-sines formula
+\[
+F(x,i)=\frac{\sin^{2}(\pi x)}{\sin^{2}(\pi x/i)}
+\]
+is evaluated with the shifted arguments $\sin(\pi(x-n))$ and $\sin(\pi\delta/i)$. This avoids the loss of absolute precision of $\sin(\pi x)$ and $\sin(\pi x/i)$ for large $x$.
+
+\item \emph{Cost and coverage.} Every branch costs $O(1)$ per index, so the overall cost is $O(\sqrt{x})$. By Lemma~\ref{lem:resonance}, resonant indices form a small fraction of all indices.
+
+\item \emph{Parameter choices.} The resonance thresholds only select the branch; the accuracy does not depend on them, since all branches are exact up to rounding. Against $40$-digit reference values on $484$ test points (near resonances, near $5040$, and up to $x\approx10^6$) the maximal relative error of the listing is $1.9\cdot10^{-15}$.
+\end{itemize}
+
+\smallskip
+Approach (B) has $O(\sqrt{x})$ complexity and is preferable when run time dominates, while approach (A) is suited to verification and the derivation of analytic identities.
+
+\paragraph*{Acknowledgements}
+Valuable discussions and helpful feedback from colleagues are gratefully acknowledged.
+

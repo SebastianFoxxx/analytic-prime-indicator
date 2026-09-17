@@ -1,0 +1,132 @@
+\section{Smooth analogues of arithmetic functions: setup}
+
+\subsection{Motivation}
+The prime-indicating property of $\mathcal{P}(x)$ comes with limited smoothness.
+The discontinuities in its second derivative are a direct result of the sharp cutoff in the summation limit $\lceil\sqrt{x}\rceil$.
+To obtain globally smooth ($C^\infty$) functions, the sharp cutoff is replaced by a smooth transition, yielding a convergent infinite series.
+The representation in \eqref{eq:Px} extends to weighted Fejér sums that reproduce divisor sums at integer arguments.
+The value of $\mathcal{P}(n)$ for a composite integer $n$ is $\frac{1}{n}\sum d^2$, which is not immediately intuitive.
+This motivates a generalization to create smooth functions that correspond to more classical arithmetic functions, such as the divisor-counting function $\tau(n)$ (the number of positive divisors of $n$) or the sum-of-divisors function $\sigma(n)$ (the sum of positive divisors of $n$).
+Definitions of $\mathcal{S}_W$ and $\mathcal{P}_W$ are given below.
+
+\subsection{Structure of the construction}
+The weighted core sum is defined as
+\[ \mathcal{S}_W(x; \kappa) = \sum_{i=2}^{\infty} \phi_{\kappa}\!\left(\frac{i}{x+1}\right) \, W(i) \, F(x,i), \]
+where $F(x,i)$ is the Fejér term from \eqref{eq:Fxi}, $W(i)$ is a weighting function, and $\phi_{\kappa}$ is a smooth cutoff. The quantity
+\[ \mathcal{P}_W(x; \kappa) := \mathcal{S}_W(x; \kappa) - N_W(x) \]
+uses $N_W$ as the normalization that enforces the desired vanishing at primes on integer input. In particular, for $W(i)=i^{-2}$ one sets $N_W(x)\equiv 1$, which yields the $\tau$-analogue $\mathcal P_\tau=\mathcal S_{i^{-2}}-1$, and for $W(i)=i^{-1}$ one sets $N_W(x)=x$, which yields the $\sigma$-analogue $\mathcal P_\sigma=\mathcal S_{i^{-1}}-x$. For integers $n$, these choices reproduce the targets $\tau(n)-2$ and $\sigma(n)-n-1$ in the steep-cutoff limit $\kappa\to\infty$.
+
+\subsection{Normalization}
+The factor $1/x$ present in the definition of $\mathcal{P}(x)$ is omitted in the smooth setting. This omission facilitates the construction of analogues for classical, unnormalized arithmetic functions. At integer arguments $n$, the identity $F(n,d)=d^2$ turns the core sum $\sum_d W(d)F(n,d)$ into a divisor sum whose contributions are directly controlled by the weighting function $W$.
+
+For instance, $W(d)=d^{-2}$ yields a unit contribution from each divisor (targeting $\tau(n)$), while $W(d)=d^{-1}$ yields a contribution of $d$ from each divisor (targeting $\sigma(n)$). The resulting prime indicator $\mathcal{P}_\sigma(x) = \mathcal{S}_\sigma(x) - x$ uses an additive comparison rather than a multiplicative one (e.g., $\mathcal{S}_\sigma(x)/x - 1$). This choice directly models the vanishing criterion for primes at the integer level, $\sigma(n)-n-1=0$, without introducing a denominator that might alter the analytic structure away from the integers.
+
+\begin{remark}[Integer evaluation and connection to divisor sums]\label{rem:integer-eval-smooth}
+At integer arguments $n$, the filter property $F(n,i)=\mathbf{1}_{i \mid n} \cdot i^2$ simplifies the core sum $\mathcal{S}_W(n;\kappa)$ to
+\[
+\mathcal{S}_W(n;\kappa) = \sum_{\substack{d \mid n \\ d \ge 2}} \phi_{\kappa}\left(\frac{d}{n+1}\right) W(d) d^2.
+\]
+The choice of weights is thus designed to reproduce classical arithmetic functions in the steep-cutoff limit $\kappa\to\infty$, where $\phi_\kappa(d/(n+1))\to 1$ for any divisor $d\le n$:
+\begin{itemize}
+    \item With $W(i)=i^{-2}$ (for $\mathcal{P}_\tau$), the limit of the sum becomes $\sum_{d|n, d\ge2} 1 = \tau(n)-1$.
+    \item With $W(i)=i^{-1}$ (for $\mathcal{P}_\sigma$), the limit of the sum becomes $\sum_{d|n, d\ge2} d = \sigma(n)-1$.
+\end{itemize}
+For any finite $\kappa>0$ and any odd prime $p$, the only contributing divisor is $d=p$. The core sums evaluate to $\phi_{\kappa}(p/(p+1))$ for the $\tau$-case and $p\,\phi_{\kappa}(p/(p+1))$ for the $\sigma$-case. Since $\phi_\kappa(u)<1$ for $u<1$, the resulting indicator values are strictly negative. Exact vanishing at primes is thus a property of the sharp-cutoff limit, not of the smooth functions for finite $\kappa$.
+\end{remark}
+
+\subsection{A Smooth Cutoff Function}
+A cutoff function is required that is essentially $1$ for $u \le 1$ and decays rapidly for $u > 1$.
+The choice $u=i/(x+1)$ includes indices with $i\lesssim x$ and, together with $\phi_\kappa$, yields absolute convergence of the infinite series.
+A function based on the hyperbolic tangent has these properties and is of class $C^\infty$.
+\begin{definition}[Smooth Transition Cutoff Function]
+Let $\kappa>0$ be a steepness parameter. The modified cutoff function $\phi_{\kappa}\colon\R\to(0,1)$ is defined as
+\begin{equation}\label{eq:phimod}
+\phi_{\kappa}(u) = \frac{1 - \tanh\big(\kappa (u - 1)\big)}{2}.
+\end{equation}
+\end{definition}
+
+\begin{lemma}[Cutoff limit and value at the threshold]
+For every $\kappa>0$, $\phi_\kappa(1)=\tfrac12$. For each fixed $\delta\in(0,1)$, the convergence $\phi_\kappa(u)\uparrow 1$ as $\kappa\to\infty$ is uniform on $(-\infty,1-\delta]$, and $\phi_\kappa(u)\downarrow 0$ as $\kappa\to\infty$ is uniform on $[1+\delta,\infty)$. Pointwise, $\phi_\kappa(u)\to \mathbf 1_{\{u<1\}}$ for all $u\neq 1$.
+\end{lemma}
+
+There is a smooth transition from $1$ to $0$ centered at $u=1$.
+The logistic form $\phi_\kappa(u)=\bigl(1+e^{2\kappa(u-1)}\bigr)^{-1}$ implies the monotone limit
+$\phi_\kappa(u)\uparrow 1$ as $\kappa\to\infty$ for every $u<1$, with the quantitative bound
+\[
+1-\phi_\kappa(u)=\frac{e^{2\kappa(u-1)}}{1+e^{2\kappa(u-1)}}\le e^{2\kappa(u-1)}.
+\]
+The cutoff is applied to $u=i/(x+1)$. For an integer $x=n$ and any divisor $d\mid n$, one has
+$u=d/(n+1)\le n/(n+1)=1-\frac{1}{n+1}$, hence
+\[
+1-\phi_\kappa\!\Bigl(\frac{d}{n+1}\Bigr)\ \le\ e^{-\,\frac{2\kappa}{\,n+1\,}},
+\]
+uniformly over all divisors $d$ (including $d=n$). Using $x+1$ instead of $x$ keeps $u$ uniformly away from the threshold at $1$ for $x>0$ and avoids degenerate cases.
+
+\begin{remark}[On the choice of cutoff]\label{rem:cutoff-choice}
+The dependence $\phi_\kappa(i/(x+1))$ cannot be replaced by a purely $x$-dependent weight without losing absolute convergence and the correct integer limits. In particular, using a factor $\psi_\kappa(x)$ independent of $i$ would turn the $\tau$-series into a sum whose generic term tends to $\sin^2(\pi x)/(\pi x)^2$ as $i\to\infty$, which is positive for $x\notin\mathbb Z$ and hence not summable there (at integers the series terminates, $\sum_{i\ge2}F(n,i)/i^2=\tau(n)-1$), and the $\sigma$-series into a sum with terms $\asymp i$ for $x\notin\mathbb Z$, which diverges even faster. The variable $u=i/(x+1)$ is essential to both analytic and arithmetic control.
+\end{remark}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{plot_cutoff_function.pdf}
+\caption{The smooth cutoff function $\phi_{\kappa}(u)$ for different values of the steepness parameter $\kappa$.
+A smooth transition from 1 to 0 occurs around $u=1$.
+For larger $\kappa$, the transition becomes steeper while $C^\infty$-smoothness is preserved.}
+\label{fig:cutoff}
+\end{figure}
+
+\FloatBarrier
+
+\subsection{Numerical complexity and truncation with a smooth cutoff}
+
+\begin{theorem}[Uniform and pointwise truncation bounds with explicit constants]\label{thm:truncation}
+Let $K=[a,b]\subset(0,\infty)$ be compact and $\kappa>0$. Set $c_K:=\frac{2\kappa}{\,b+1\,}$ and $r:=e^{-c_K}\in(0,1)$. Then for every integer $M\in\mathbb{N}$ with $M\ge b+1$,
+\begin{align*}
+\sup_{x\in K}\ \sum_{i>M}\phi_\kappa\!\left(\frac{i}{x+1}\right)\frac{|F(x,i)|}{i^2}
+&\ \le\ \frac{r^{\,M-b}}{1-r},\\[4pt]
+\sup_{x\in K}\ \sum_{i>M}\phi_\kappa\!\left(\frac{i}{x+1}\right)\frac{|F(x,i)|}{i}
+&\ \le\ r^{\,M-b}\!\left(\frac{M+1}{1-r}+\frac{r}{(1-r)^2}\right)
+\ \le\ \frac{(M+2)\,r^{\,M-b}}{(1-r)^2}.
+\end{align*}
+For any $\varepsilon\in(0,1)$ a sufficient uniform choice for the $\tau$-case is
+\[
+M_\tau^{\mathrm{unif}}=\max\left\{\lceil b+1\rceil,\ \left\lceil b+\frac{1}{c_K}\log\!\Bigl(\frac{1}{(1-e^{-c_K})\,\varepsilon}\Bigr)\right\rceil\right\}.
+\]
+For the $\sigma$-case one may select the minimal integer $M\ge b+1$ such that
+\[
+\frac{(M+2)\,e^{-c_K(M-b)}}{(1-e^{-c_K})^2}\ \le\ \varepsilon,
+\]
+which exists because the left-hand side tends to $0$ as $M\to\infty$ and is eventually strictly decreasing in $M$. For fixed $x>0$, the pointwise analogues follow upon replacing $c_K$ by $c_x:=2\kappa/(x+1)$ and $b$ by $x$, and choosing any integer $M\ge \lfloor x\rfloor+1$ so that $i/(x+1)\ge 1$ holds for all $i>M$.
+\begin{proof}
+For $x\in[a,b]$ and every index $i$, the exact logistic form gives, with $u=i/(x+1)$,
+\[
+\phi_\kappa(u)=\frac{1}{1+e^{2\kappa(u-1)}}\ \le\ e^{-2\kappa(u-1)}
+\ =\ e^{2\kappa}\,e^{-2\kappa i/(x+1)}\ \le\ e^{2\kappa}\,e^{-c_K i}\ =\ r^{\,i-(b+1)},
+\]
+since $e^{2\kappa}=e^{c_K(b+1)}=r^{-(b+1)}$. With $|F(x,i)|\le i^2$ and $\sum_{i>M}r^{\,i-(b+1)}=r^{\,M-b}/(1-r)$ the first bound follows. For the second bound, $\sum_{i>M} i\,r^{\,i-(b+1)}=r^{\,M-b}\bigl(\frac{M+1}{1-r}+\frac{r}{(1-r)^2}\bigr)\le \frac{(M+2)\,r^{\,M-b}}{(1-r)^2}$. The condition $M\ge b+1$ is a convenient normalisation and is not needed for the estimate: the bound $\phi_\kappa(u)\le e^{-2\kappa(u-1)}$ holds for every real $u$. The remaining statements are immediate.
+\end{proof}
+\end{theorem}
+
+\begin{remark}[The normalisation $M\ge b+1$]\label{rem:M-normalisation}
+The hypothesis $M\ge b+1$ in Theorem~\ref{thm:truncation} is a normalisation, not a
+requirement: the only property of the cutoff used in the proof is
+$\phi_\kappa(u)\le e^{-2\kappa(u-1)}$, and this holds for \emph{every} real $u$, since
+$\tfrac{1}{1+e^{t}}\le e^{-t}$ is equivalent to $1\le 1+e^{-t}$. Both displayed bounds
+therefore hold verbatim for every integer $M\ge0$.
+
+The normalisation is nevertheless the right one to state, because below it the bounds, while
+true, carry no information: for $\kappa\in\{1,5\}$, $K=[1,10]$ and $K=[1,50]$, and
+$M\in\{1,2,3\}$, the right-hand side $r^{\,M-b}/(1-r)$ exceeds $1$ in every one of the twelve
+combinations, whereas the $\tau$-tail it bounds is itself at most $\tau(x)$-sized. Requiring
+$M\ge b+1$ is what makes the estimate a statement about a small remainder rather than a
+vacuous inequality. Theorem~\ref{thm:truncation} is left as stated for that reason.
+\end{remark}
+
+\begin{remark}[On the tail constants]
+The bounds in Theorem~\ref{thm:truncation} use the exact logistic inequality $\phi_\kappa(u)\le e^{-2\kappa(u-1)}$. The factor $e^{2\kappa}=r^{-(b+1)}$ produced by the shift $u-1$ cannot be dropped: for $\kappa=5$, $K=[1,10]$ and $M=11$ the actual $\tau$-tail reaches $5.1\cdot10^{-3}$, whereas $r^{M+1}/(1-r)\approx3.1\cdot10^{-5}$. Any re-centering of the tail only improves the global constant without changing the geometric rate.
+\end{remark}
+
+
+Consequently, for $\kappa\ge1$ and $\varepsilon\in(0,1)$ the cost per evaluation at a given $x$ is $O\!\bigl(1+x+\tfrac{1+x}{\kappa}[\log(1/\varepsilon)+\log(2+x)]\bigr)$ for both $\mathcal P_\tau$ and $\mathcal P_\sigma$; the term $\log(2+x)$ stems from the factor $(1-r)^{-1}\le 1+(x+1)/(2\kappa)$. Near resonances $x/i\approx\mathbb{Z}$, numerical stability is improved by switching to the cosine-polynomial representation of $F(x,i)$, as in the baseline pseudocode.
+
+% ---------------------------------------------------------------------------

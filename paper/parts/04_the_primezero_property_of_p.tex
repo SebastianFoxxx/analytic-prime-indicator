@@ -1,0 +1,94 @@
+\section{The Prime–Zero Property of $\mathcal{P}(x)$}
+
+\begin{remark}
+By construction, $\mathcal P(2)=2$. Hence the zero statement in Theorem~\ref{thm:primezero} concerns odd primes only.
+\end{remark}
+
+\noindent The divisor-filter identity $F(n,i)/i^2=\mathbf{1}_{i\mid n}$ is stated in Proposition~\ref{prop:fejer-properties}\,(b) and is used implicitly below.
+
+\begin{theorem}[Odd prime zeros and positivity away from integers]\label{thm:primezero}
+For all real $x>1$, the function $\mathcal P(x)$ is strictly positive whenever $x\notin\mathbb Z$. Moreover, for all real $x>1$,
+\[
+\mathcal P(x)=0\quad\Longleftrightarrow\quad x\in\mathbb N\ \text{and $x$ is an odd prime}.
+\]
+The restriction $x>1$ is needed: by Definition~\ref{def:Px} one has $\mathcal P\equiv0$ on $(-\infty,1]$, so for instance $\mathcal P(1/2)=0$.
+In particular, $\mathcal P(2)=2$.
+\end{theorem}
+\begin{proof}
+Let $x>1$ with $x\notin\mathbb Z$. Then $x/i\notin\mathbb Z$ for every integer $i\ge 2$; otherwise $x=i\cdot (x/i)\in\mathbb Z$, a contradiction. Hence, by Proposition~\ref{prop:fejer-properties}(c), $F(x,i)>0$ holds for all $i\ge 2$, so each summand in the finite sum is strictly positive and therefore $\mathcal P(x)>0$.
+
+Let $x=n\in\mathbb N$, $n\ge 2$. If $n$ is an odd prime, then $i\nmid n$ for all $2\le i\le \lceil\sqrt n\rceil$, implying $F(n,i)=0$ and $\mathcal P(n)=0$. If $n$ is composite, there exists $d$ with $2\le d\le \sqrt n$ and $d\mid n$, hence $F(n,d)=d^2>0$ and $\mathcal P(n)>0$. Finally, at $n=2$ the sum reduces to the single index $i=2$ with $F(2,2)=4$, so $\mathcal P(2)=\frac{4}{2}=2>0$.
+\end{proof}
+
+\begin{lemma}[Local quadratic behavior near an odd prime]\label{lem:local-quadratic}
+Let $p\ge 3$ be prime and put $N(p):=\lceil \sqrt{p}\rceil$. Define
+\[
+c_p\ :=\ \tfrac12\min_{\,2\le i\le N(p)}\bigl|\sin(\pi p/i)\bigr|\ >\ 0,
+\qquad
+\delta_p^{(1)}\ :=\ \frac{c_p}{\pi},
+\qquad
+\delta_p^{(2)}\ :=\ \tfrac12\min\bigl\{\,p-(N(p)-1)^2,\ N(p)^2-p\,\bigr\}.
+\]
+Let $\delta_p:=\min\{\delta_p^{(1)},\delta_p^{(2)}\}$. Then for all $x$ with $|x-p|<\delta_p$ one has $N(x)=N(p)$ and
+\[
+\mathcal P(x)=C_p\,(x-p)^2+O\bigl((x-p)^3\bigr),
+\qquad
+C_p=\frac{\pi^2}{p}\sum_{i=2}^{N(p)}\frac{1}{\sin^2(\pi p/i)}\ \ge\ \frac{\pi^2}{p}\,.
+\]
+The implicit constant in the $O(\cdot)$ term depends only on $p$ and the bound is uniform over all $i\le N(p)$.
+
+\begin{proof}
+For every $i\in\{2,\dots,N(p)\}$ one has $\sin(\pi p/i)\neq 0$ because $p$ is prime and $i<p$, hence $c_p>0$. Moreover,
+\[
+\Bigl|\partial_x \sin\!\Bigl(\frac{\pi x}{i}\Bigr)\Bigr|\le \frac{\pi}{2}\qquad(i\ge 2).
+\]
+Thus, for $|x-p|<\delta_p^{(1)}:=c_p/\pi$,
+\[
+\bigl|\sin(\tfrac{\pi x}{i})\bigr|\ge \bigl|\sin(\tfrac{\pi p}{i})\bigr|-\frac{\pi}{2}|x-p|\ge \frac{c_p}{2},
+\]
+uniformly in $2\le i\le N(p)$. Choosing $\delta_p^{(2)}$ as in the statement keeps $N(x)$ constant. With $\delta_p:=\min\{\delta_p^{(1)},\delta_p^{(2)}\}$, Taylor expansions yield
+\[
+\sin(\pi x)=(-1)^p\Bigl(\pi(x-p)-\frac{\pi^3}{6}(x-p)^3\Bigr)+O\bigl(|x-p|^5\bigr),
+\]
+\[
+\sin\!\Bigl(\frac{\pi x}{i}\Bigr)=\sin\!\Bigl(\frac{\pi p}{i}\Bigr)+\frac{\pi}{i}\cos\!\Bigl(\frac{\pi p}{i}\Bigr)(x-p)+O\bigl((x-p)^2\bigr),
+\]
+where the $O(\cdot)$ is uniform in $i$ for $2\le i\le N(p)$. Division is legitimate since $|\sin(\pi x/i)|\ge c_p/2$ on $|x-p|<\delta_p$, and hence
+\[
+F(x,i)=\left(\frac{\sin(\pi x)}{\sin(\pi x/i)}\right)^{\!2}
+=\frac{\pi^2}{\sin^2(\pi p/i)}(x-p)^2+R_i(x),
+\]
+with a uniform bound $|R_i(x)|\le C_p^{(0)}\,|x-p|^3$ for some constant $C_p^{(0)}$ depending only on $p$. Summation over $i\le N(p)$ preserves the $O(|x-p|^3)$ scale. Since $N(x)=N(p)$ and $1/x=1/p+O(x-p)$ on $|x-p|<\delta_p$,
+\[
+\mathcal P(x)=\frac{1}{x}\sum_{i=2}^{N(p)}F(x,i)
+=\frac{1}{p}\sum_{i=2}^{N(p)}\frac{\pi^2}{\sin^2(\pi p/i)}(x-p)^2+O\bigl(|x-p|^3\bigr),
+\]
+where the implicit constant depends only on $p$: since $x\ge p/2$ and $|1/x-1/p|\le 2|x-p|/p^2$ on $|x-p|<\delta_p$, one may take $\widetilde C_p:=\tfrac{2}{p}\bigl((N(p)-1)\,C_p^{(0)}+C_p\bigr)$, with $C_p$ the leading coefficient from the statement. The lower bound $C_p\ge \pi^2/p$ follows from $i=2$ and $\sin(\pi p/2)=\pm 1$ for odd $p$.
+\end{proof}
+\end{lemma}
+
+
+\begin{remark}[Extension to all primes]
+The indicator $\mathcal{P}(x)$ does not vanish at $p=2$. The companion manuscript~\cite{fuchs2025-fejer} develops entire-function analogues based on infinite weighted sums of divisor filters, which extend the prime-zero property to all primes, including $p=2$, at the cost of requiring a limiting process ($\kappa\to\infty$) for exact integer evaluation.
+\end{remark}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.9\textwidth]{plot_overview.pdf}
+\caption{Numerical profile of $\mathcal{P}(x)$ for $2\le x\le 50$.
+Dotted vertical lines mark odd primes;
+$\mathcal{P}(x)$ vanishes at these positions in accordance with Theorem~\ref{thm:primezero}.}
+\label{fig:overview}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{plot_zoom_13.pdf}
+\caption{Local behavior of $\mathcal{P}(x)$ near $x=13$ (an odd prime).
+A zero occurs at $x=13$ without a sign change, consistent with nonnegativity and the odd prime–zero property.}
+\label{fig:zoom13}
+\end{figure}
+
+\FloatBarrier
+
+% ---------------------------------------------------------------------------

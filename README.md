@@ -97,3 +97,41 @@ To run the numerical verifications and regenerate all plots from the paper, plea
 ### License
 
 The source code in this repository is released under the **MIT License**. See the `LICENSE` file for more details. The content of the research paper is subject to the copyright of the author.
+
+
+## Building the paper
+
+**Build from the repository root, not from `paper/`.** The preamble sets
+`\graphicspath{{./}{./figures/}}`, and TeX resolves that relative to the *working
+directory*. Running `pdflatex` inside `paper/` therefore fails with missing figures and no
+useful diagnostic. The build script encodes this:
+
+```bash
+python build.py testbuild                 # build into .build/, report the fingerprint
+python build.py fingerprint               # store the current fingerprint (.fingerprint.json)
+python build.py check                     # rebuild and compare against the stored fingerprint
+python build.py release ../my_package     # assemble a flat submission package and verify it
+```
+
+`testbuild` never writes into the repository (it uses `-output-directory`).
+
+**The fingerprint** records the page count, every `\label` together with its number, the
+number of bibliography entries, undefined references and missing figures. It is the safety
+net for structural work: after splitting, moving or reordering the source, `check` must
+report *identical*. It is what made the split into `paper/parts/` verifiable.
+
+**`release`** assembles a single self-contained `.tex` (the `\input` parts are inlined
+again, so a submission looks exactly as it always did), copies the figures that are actually
+referenced, writes a `MANIFEST.json` with an md5 for every source and figure — and then
+**builds the package once more inside the package directory** and compares the result. A
+package that does not build itself is not a package.
+
+## Source layout
+
+```
+paper/analytic_prime_indicator.tex          preamble, front matter, and the \input list
+paper/parts/*.tex         one file per section; the appendix and the bibliography separately
+figures/                  the figures the paper references (the single canonical copy)
+build.py                  the build described above
+.fingerprint.json         the reference fingerprint for `build.py check`
+```
