@@ -50,11 +50,15 @@ For $m\ge1$, the second derivative $\mathcal P''$ admits one-sided limits at $x=
 \[
 \Delta_{m^2}\mathcal P''\ :=\ \mathcal P''(m^2{+})-\mathcal P''(m^2{-})
 \]
-is strictly positive and equals
+equals
 \[
-\Delta_{m^2}\mathcal{P}''=\frac{2\pi^2}{m^2\,\sin^2\!\bigl(\pi/(m+1)\bigr)}.
+\Delta_{m^2}\mathcal{P}''=\frac{2\pi^2}{m^2\,\sin^2\!\bigl(\pi/(m+1)\bigr)},
 \]
-In particular, for $m=1$ one obtains $\Delta_{1^2}\mathcal P''=2\pi^2$.
+and satisfies the uniform bound
+\[
+\Delta_{m^2}\mathcal{P}''\ \ge\ \frac{2(m+1)^2}{m^2}\ >\ 2\qquad\text{for every }m\ge1 ;
+\]
+in particular it is strictly positive. For $m=1$ one obtains $\Delta_{1^2}\mathcal P''=2\pi^2$.
 \end{proposition}
 
 \begin{proof}
@@ -85,6 +89,7 @@ Therefore $F''(m^2,m{+}1)=2\pi^2\,\csc^2\!\bigl(\pi/(m{+}1)\bigr)$ and
 \[
 \Delta_{m^2}\mathcal P''=\frac{2\pi^2}{m^2\,\sin^2\!\bigl(\pi/(m{+}1)\bigr)}.
 \]
+For the uniform bound, $\sin z\le z$ for $z\ge0$ gives $\sin^2\!\bigl(\pi/(m{+}1)\bigr)\le\pi^2/(m{+}1)^2$, hence $\Delta_{m^2}\mathcal P''\ge 2\pi^2(m{+}1)^2/(\pi^2m^2)=2(m{+}1)^2/m^2>2$.
 \end{proof}
 
 \begin{remark}[Asymptotics of the jump size]
@@ -103,16 +108,9 @@ With $(m+1)^2=m^2(1+\tfrac{2}{m}+\tfrac{1}{m^2})$ this gives
 \Delta_{m^2}\mathcal{P}''=2\Bigl(1+\tfrac{2}{m}+\tfrac{1}{m^2}\Bigr)\Bigl(1+\tfrac{\pi^2}{3(m+1)^2}+O(m^{-4})\Bigr)
 =2+\frac{4}{m}+\frac{2+2\pi^2/3}{m^2}+O(m^{-3}).
 \]
-In particular, $\Delta_{m^2}\mathcal P''\to 2$ as $m\to\infty$. The limit is approached
-\emph{from above}, and with an explicit margin: since $\sin z\le z$ for $z\ge0$,
-\[
-\Delta_{m^2}\mathcal{P}''
-=\frac{2\pi^2}{m^2\sin^2\!\bigl(\pi/(m+1)\bigr)}
-\ \ge\ \frac{2\pi^2}{m^2\,\bigl(\pi/(m+1)\bigr)^{2}}
-\ =\ \frac{2(m+1)^2}{m^2}\ >\ 2
-\qquad\text{for every }m\ge1 .
-\]
-The jump at a square is thus bounded below by $2$ uniformly in $m$, and the bound is
+In particular, $\Delta_{m^2}\mathcal P''\to 2$ as $m\to\infty$. By the uniform bound in
+Proposition~\ref{prop:second}, the limit is approached \emph{from above}, with the explicit margin
+$\Delta_{m^2}\mathcal P''\ge 2(m+1)^2/m^2>2$ for every $m\ge1$. This bound is
 asymptotically sharp: the ratio of $\Delta_{m^2}\mathcal P''$ to $2(m+1)^2/m^2$ equals
 $2.47$ at $m=1$, $1.097$ at $m=5$, and $1+O(m^{-2})$ thereafter. Numerically the sequence is
 strictly decreasing for all $m\le 2\cdot10^{5}$; monotonicity is not claimed here.

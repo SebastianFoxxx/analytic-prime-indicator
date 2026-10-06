@@ -1,0 +1,12 @@
+E7792 Rest p<23 (mpmath.iv, Soundness angenommen)
+  p= 5: C=6,4 zertifiziert=True (kleinste untere Schranke 0.00065, 72 Intervalle); kleinstes zertifiziertes C = 3.2500000000000004; Float min Lam = 0.03160
+  p= 7: C=6,4 zertifiziert=True (kleinste untere Schranke 0.01001, 43 Intervalle); kleinstes zertifiziertes C = 1.2; Float min Lam = 0.13617
+  p=11: C=6,4 zertifiziert=True (kleinste untere Schranke 0.06746, 22 Intervalle); kleinstes zertifiziertes C = 0.65; Float min Lam = 0.52233
+  p=13: C=6,4 zertifiziert=True (kleinste untere Schranke 0.00980, 29 Intervalle); kleinstes zertifiziertes C = 0.65; Float min Lam = 0.46572
+  p=17: C=6,4 zertifiziert=True (kleinste untere Schranke 0.04334, 20 Intervalle); kleinstes zertifiziertes C = 0.5; Float min Lam = 0.87853
+  p=19: C=6,4 zertifiziert=True (kleinste untere Schranke 0.00451, 19 Intervalle); kleinstes zertifiziertes C = 0.5; Float min Lam = 1.04828
+A  alle sechs bei C=6,4: ok
+B  C_cert(p) <= Tabelle: ok  {5: 3.2500000000000004, 7: 1.2, 11: 0.65, 13: 0.65, 17: 0.5, 19: 0.5}
+C  p=5 schlechtestes unter p<23: ok
+D  Mutant ohne Randsummand i=p+1, p=5, C=6,4: zertifiziert=False (untere Schranke -1.0000) -> ok (faellt)
+ERGEBNIS: GRUEN

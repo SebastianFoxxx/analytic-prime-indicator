@@ -1,0 +1,5 @@
+Klasse p = 5 mod 6, p >= 29: Zertifikat Lcl > 0,0015 auf [0,18;1]: ok=True, Kaesten 11, Lcl(0,18) = [0.03076500161 +/- 1.58e-12], Rastermin 0.030765 bei t = 0.1800
+Klasse p = 1 mod 6, p >= 31: Zertifikat Lcl > 0,0015 auf [0,18;1]: ok=True, Kaesten 13, Lcl(0,18) = [0.02086779445 +/- 4.69e-12], Rastermin 0.020868 bei t = 0.1800
+Klassen-Minorante gegen 3274 Direktsummen-Zellen (p >= 29, E7929): 0 Verletzungen, kleinster Schlupf 0.02778
+Mutant 'Klassen vertauscht': 503 Verletzungen
+ERGEBNIS E7930: GRUEN

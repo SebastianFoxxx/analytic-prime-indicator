@@ -1,0 +1,24 @@
+E7927 K2-Zertifikat in Arb, ctx.prec = 200 Bit
+Objekt (C4): P_inf (kappa=inf), p ungerade Primzahl >= 23, t in [0,18; 1). Schwelle 0,0015 (Satz K2).
+(A) adaptiv F>0,0015 auf [0,18;1]: ok=True, Kaesten 55, Teilungen 27, kleinste Kasten-Untergrenze [0.001552065773 +/- 5.51e-14] (KEINE Marge, haengt an der Kastenbreite)
+(B) Taylor [0,18;0,92]: ok=True, Kaesten 255, kleinste Untergrenze [0.001836586272 +/- 2.12e-13]
+    adaptiv [0,92;1] (s-Form, sinc-Reihe): ok=True, Kaesten 1, kleinste Untergrenze [0.4350203053 +/- 3.60e-11]
+(C) F(0,18) = [0.00184562691819135 +/- 3.26e-18]  (Marge zu 0,0015: [0.00034562692 +/- 1.81e-12], relativ [0.23042 +/- 2.06e-6])
+    Rastermin (2001 exakte rationale Punkte, Ball-Untergrenze): [0.00184562691819 +/- 1.36e-15] bei t = 0.180000
+    Float-Rastermin 0.00184563 bei t = 0.180000 (Minimum am linken Rand: True)
+(D) Raster: min U = 0.01549606 (bei t = 0.18000), max V = 1.00000000
+    U > u0 = [0.015418580 +/- 1e-14] auf [0,18;1]: ok=True Kaesten 43;  V < v0 = [1.0050000 +/- 3e-12]: ok=True Kaesten 21
+    => fuer alle p > p* = v0/(u0-0,0015) = [72.205642 +/- 3.33e-7] gilt L_19(p,t) >= u0 - v0/p > 0,0015 auf [0,18;1] (rigoros, ohne Monotonie)
+    Grenzfall p -> inf: L_19(inf,t) = U(t) >= u0 = [0.015418580 +/- 1e-14] = [10.279 +/- 5.34e-5] x 0,0015
+    V > 0 auf [0,18;1] (Monotonie: L_19(p,t) steigt in p): ok=True, Kaesten 3
+(E) p=23: Zertifikat ok=True, Kaesten 55, L_19(p;0,18) = [0.001845626918 +/- 1.92e-13]
+(E) p=29: Zertifikat ok=True, Kaesten 25, L_19(p;0,18) = [0.004669854640 +/- 3.65e-13]
+(E) p=31: Zertifikat ok=True, Kaesten 25, L_19(p;0,18) = [0.005368319560 +/- 6.89e-15]
+(E) p=37: Zertifikat ok=True, Kaesten 21, L_19(p;0,18) = [0.007010655994 +/- 3.47e-13]
+(E) p=101: Zertifikat ok=True, Kaesten 15, L_19(p;0,18) = [0.01238754623 +/- 4.88e-12]
+(E) p=1009: Zertifikat ok=True, Kaesten 13, L_19(p;0,18) = [0.01518490136 +/- 6.16e-13]
+(E) p=10007: Zertifikat ok=True, Kaesten 13, L_19(p;0,18) = [0.01546468687 +/- 1.18e-12]
+(E) p=1000003: Zertifikat ok=True, Kaesten 13, L_19(p;0,18) = [0.01549574695 +/- 3.87e-12]
+    Monotonie in p am Rand t = 0,18 sichtbar: True
+
+ERGEBNIS E7927: K2 IN ARB ZERTIFIZIERT (beide Mechaniken, p-gleichmaessig)   Laufzeit 1.0s

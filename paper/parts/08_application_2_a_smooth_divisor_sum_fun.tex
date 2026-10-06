@@ -13,7 +13,7 @@ For $x>0$ and a steepness parameter $\kappa>0$, define
 For integer arguments $n$, the summation part evaluates to the sum of all divisors except 1, which is $\sigma(n)-1$. Subtraction of $n$ yields an expression that vanishes precisely at primes, for which $\sigma(n)-1=n$.
 \subsection{Properties of $\mathcal{P}_{\sigma}$}
 
-\begin{proposition}[Properties of $\mathcal{P}_{\sigma}$]
+\begin{proposition}[Properties of $\mathcal{P}_{\sigma}$]\label{prop:Psigma-properties}
 The function $\mathcal{P}_{\sigma}(x;\kappa)$ is $C^\infty$ on $(0,\infty)$. For any integer $n\ge2$,
 \[
 \lim_{\kappa\to\infty} \mathcal{P}_{\sigma}(n; \kappa) = \sigma(n) - n - 1,
@@ -40,14 +40,14 @@ For each odd prime $p\ge 3$ and sufficiently large $\kappa$, $\mathcal P_\sigma(
 \[
 p - x_p^-(\kappa)\ \asymp\ p\,\mathrm e^{-2\kappa/(p+1)}\qquad(\kappa\to\infty),
 \]
-whose existence and scale are proved in Lemma~\ref{lem:Psigma-left-zero}, and a right zero whose distance to $p$ appears to remain bounded away from zero as $\kappa\to\infty$. The conjectural part is the statement about the right zero. The value at $p$ is explicit: $\mathcal P_\sigma(p;\kappa)=-p\bigl(1-\phi_\kappa(\tfrac{p}{p+1})\bigr)=-p/\bigl(1+\mathrm e^{2\kappa/(p+1)}\bigr)$.
+whose existence and scale are proved in Lemma~\ref{lem:Psigma-left-zero}, and a right zero whose distance to $p$ appears to converge to a positive limit as $\kappa\to\infty$ (Figure~\ref{fig:PsigmaCompanions}). Partial results: for each fixed $p$ the right zero stays bounded away from $p$ (Proposition~\ref{prop:Psigma-right-fixed}) and is unique for $\kappa\ge3.25\,(p+1)\ln p$ (Proposition~\ref{prop:Psigma-unique}); the convergence of the distance and its uniformity in $p$ are open. The value at $p$ is explicit: $\mathcal P_\sigma(p;\kappa)=-p\bigl(1-\phi_\kappa(\tfrac{p}{p+1})\bigr)=-p/\bigl(1+\mathrm e^{2\kappa/(p+1)}\bigr)$.
 \end{conjecture}
 
 % remark: Unified terminology is provided once in Definition~\ref{def:zero-terminology}.
 
 As a numerical illustration of Conjecture~\ref{conj:Psigma-companions}, 
 Figure~\ref{fig:PsigmaCompanions} plots $\mathcal P_\sigma(x;\kappa)$ on $[2,8]$ for 
-$\kappa\in\{2,10,20,100\}$. The predicted asymmetry is visible: an exponentially close left zero and a right zero at a $\kappa$-independent distance near each odd prime, while the value at $x=p$ remains negative for finite~$\kappa$. A complete scan of $[1.5,\,8.5]$ at $\kappa=40$ locates nine real zeros and shows that a zero lying to the left of a prime $p$ need not be unique: between $2$ and $3$ there are two, namely the right companion of $2$ at $x=2.70361851\ldots$ and the left approximant of $3$ at $x=3-6.18\cdot10^{-9}$. Accordingly, Lemma~\ref{lem:Psigma-left-zero} is an existence statement and $x_p^-(\kappa)$ denotes a zero produced by it, not a uniquely determined one.
+$\kappa\in\{2,10,20,100\}$. The predicted asymmetry is visible: an exponentially close left zero and a right zero at a distance bounded away from $0$ near each odd prime, while the value at $x=p$ remains negative for finite~$\kappa$. A complete scan of $[1.5,\,8.5]$ at $\kappa=40$ locates nine real zeros and shows that a zero lying to the left of a prime $p$ need not be unique: between $2$ and $3$ there are two, namely the right companion of $2$ at $x=2.70361851\ldots$ and the left approximant of $3$ at $x=3-6.18\cdot10^{-9}$. Accordingly, Lemma~\ref{lem:Psigma-left-zero} is an existence statement and $x_p^-(\kappa)$ denotes a zero produced by it, not a uniquely determined one.
 
 \begin{figure}[!htbp]
 \centering
@@ -178,7 +178,7 @@ An $i$-dependent choice for $\delta_i$ could slightly improve the constants in t
 \centering
 \includegraphics[width=0.9\textwidth]{plot_P_sigma_zeros.pdf}
 \caption{Behavior of the smooth divisor-sum analogue $\mathcal{P}_{\sigma}(x; \kappa)$ for $\kappa=1000$ on $[0,8]$.
-At any finite $\kappa$, $\mathcal P_\sigma(p;\kappa)<0$ at odd primes $p$; as $\kappa\to\infty$ the value at $x=p$ tends to $0$. Consistent with Conjecture~\ref{conj:Psigma-companions}, one observes a \emph{left prime-zero approximant} exponentially close to $p$ and a \emph{right companion zero} at a $\kappa$-independent distance. Away from these neighborhoods, the existence of additional non-integer zeros remains unresolved; accordingly, the prime-indicator interpretation is restricted to integer input.}
+At any finite $\kappa$, $\mathcal P_\sigma(p;\kappa)<0$ at odd primes $p$; as $\kappa\to\infty$ the value at $x=p$ tends to $0$. Consistent with Conjecture~\ref{conj:Psigma-companions}, one observes a \emph{left prime-zero approximant} exponentially close to $p$ and a \emph{right companion zero} at a distance bounded away from zero. Away from these neighborhoods, the existence of additional non-integer zeros remains unresolved; accordingly, the prime-indicator interpretation is restricted to integer input.}
 \label{fig:P_sigma}
 \end{figure}
 

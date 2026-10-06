@@ -1,0 +1,10 @@
+V1 Zerlegung: max |rec-P|/p = 9.85e-16  -> ok
+V2 float gegen mpmath-Definition: max |dP| = 7.11e-14 -> ok
+V3 Lam<=P, H>=0, D>=0, om in (0,1/2]: ok
+V4 Lam monoton in kappa (x1, x2, x4): ok
+V5 P(p;kappa) geschlossene Form gegen mpmath bei t=1e-12: 1.00e-12 -> ok
+V6 t -> 1: |P - (sigma(p+1)-p-2)| max = 1.28e-07 -> ok
+M1 (ohne D): Abweichung 1.10e-01 -> ok (faellt)
+M2 (om=1/2): Abweichung 2.64e+00 -> ok (faellt)
+M3 (Gewicht 1/i^2 statt i): Abweichung 2.70e+00 -> ok (faellt)
+GATE GRUEN

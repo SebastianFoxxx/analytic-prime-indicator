@@ -1,0 +1,17 @@
+E7828 Zertifikat K1' p<23 - 2026-10-06 13:34  s-Boxen 2961
+p= 5 C=3,25: ok=True Marge-Ziel=0.5  min P''/p >= 0.60113  bei t in [0.00000, 0.00281]  eps_rest=7.4829e-02  kappa_min=31.3840  sigma0=0.99997138  t-Boxen=64  mono_ok=True ratio_ok=True  (0.6 s)
+p= 7 C=3,25: ok=True Marge-Ziel=0.5  min P''/p >= 1.03178  bei t in [0.15188, 0.15469]  eps_rest=1.6955e-02  kappa_min=50.5937  sigma0=0.99999679  t-Boxen=64  mono_ok=True ratio_ok=True  (0.6 s)
+p=11 C=3,25: ok=True Marge-Ziel=0.5  min P''/p >= 2.20314  bei t in [0.00000, 0.00281]  eps_rest=2.2650e-03  kappa_min=93.5179  sigma0=0.99999983  t-Boxen=64  mono_ok=True ratio_ok=True  (0.7 s)
+p=13 C=3,25: ok=True Marge-Ziel=0.5  min P''/p >= 0.50811  bei t in [0.16594, 0.16875]  eps_rest=1.0757e-03  kappa_min=116.7052  sigma0=0.99999994  t-Boxen=68  mono_ok=True ratio_ok=True  (0.8 s)
+p=17 C=3,25: ok=True Marge-Ziel=0.5  min P''/p >= 1.97666  bei t in [0.17719, 0.18000]  eps_rest=3.2632e-04  kappa_min=165.7430  sigma0=0.99999999  t-Boxen=64  mono_ok=True ratio_ok=True  (0.7 s)
+p=19 C=3,25: ok=True Marge-Ziel=0.5  min P''/p >= 1.83665  bei t in [0.17719, 0.18000]  eps_rest=1.9933e-04  kappa_min=191.3885  sigma0=1.00000000  t-Boxen=64  mono_ok=True ratio_ok=True  (0.6 s)
+== Z2 R = 1200 (Sensitivitaet)
+p=5 R=1200: ok=True min P''/p >= 0.60413  (R=600: 0.60113)
+p=13 R=1200: ok=True min P''/p >= 0.43191  (R=600: 0.50811)
+== Z3 kleinstes zertifiziertes C je p (Marge > 0, Raster)
+p=5: kleinstes zertifiziertes C auf dem Raster = 1.75
+p=7: kleinstes zertifiziertes C auf dem Raster = 1.25
+p=11: kleinstes zertifiziertes C auf dem Raster = 1.0
+p=13: kleinstes zertifiziertes C auf dem Raster = 1.25
+p=17: kleinstes zertifiziertes C auf dem Raster = 1.0
+p=19: kleinstes zertifiziertes C auf dem Raster = 1.0

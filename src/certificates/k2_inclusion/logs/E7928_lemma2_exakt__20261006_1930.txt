@@ -1,0 +1,7 @@
+sigma-Sieb bis 2000050: 4.8s
+Primzahlen 23..2e6: 148925
+(a) Paritaets-Tabelle: 5659150 Zellen, 0 Verletzungen
+(b) w_p(0) = p: 0 Verletzungen ueber 148925 Primzahlen
+(c) Klassen-mod-6-Gewichte (p>=29): 0 Verletzungen
+Negativkontrollen: erfundenes d/3: 1850350 Verletzungen; M2 (c=+1/2 bei ungeraden rho<=-3): 1106025 Verletzungen
+ERGEBNIS E7928: GRUEN  (5.5s)

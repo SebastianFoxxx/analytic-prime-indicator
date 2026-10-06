@@ -34,9 +34,9 @@ A resonant partial-fraction form and quantitative truncation bounds are provided
   \item \textbf{A precise characterization of smoothness.} The function \(\mathcal P\) is \(C^1\) on \((0,\infty)\) and piecewise \(C^\infty\). Its second derivative has jump discontinuities exclusively at integer squares \(x=m^2\), governed by the explicit formula
   \[
   \Delta_{m^{2}}\mathcal{P}''=\frac{2\pi^{2}}{m^{2}\sin^{2}\!\bigl(\pi/(m+1)\bigr)}
-  =2+\frac{4}{m}+O(m^{-2}).
+  =2+\frac{4}{m}+O(m^{-2}),
   \]
-  (Proposition~\ref{prop:second}.)
+  and every jump exceeds $2$: $\Delta_{m^2}\mathcal P''\ge 2(m+1)^2/m^2$ (Proposition~\ref{prop:second}).
   \item \textbf{Extension to smooth analogues of arithmetic functions.} The construction is generalized to obtain \(C^\infty\) analogues \(\mathcal P_\tau(\cdot;\kappa)\) and \(\mathcal P_\sigma(\cdot;\kappa)\), which admit locally uniform control of all derivative series. For integers \(n\ge2\) and in the limit \(\kappa\to\infty\), these functions converge to values determined by classical arithmetic functions:
   \[
   \mathcal{P}_\tau(n;\kappa)\to \tau(n)-2,\qquad
@@ -45,10 +45,10 @@ A resonant partial-fraction form and quantitative truncation bounds are provided
 \end{itemize}
 
 \subsection*{Scope and Limitations}
-All statements about primes and composites concern integer input. No claims are made regarding the prime number theorem, densities, or zero-free regions. The indicator $\mathcal P$ characterizes odd primality at integers and requires $\Theta(\sqrt n)$ work, so no algorithmic advantage over trial division is implied. For non-integer input, only conjectural local features near odd primes are discussed for the smooth variants.
+All statements about primes and composites concern integer input. No claims are made regarding the prime number theorem, densities, or zero-free regions. The indicator $\mathcal P$ characterizes odd primality at integers and requires $\Theta(\sqrt n)$ work, so no algorithmic advantage over trial division is implied. For non-integer input, local features near odd primes are discussed for the smooth variants: existence and scale of some companion zeros are proved (Corollary~\ref{cor:Ptau-flank}, Lemma~\ref{lem:Psigma-left-zero}, Section~\ref{subsec:Psigma-right}, the latter partly computer-assisted); the remaining statements (Conjectures~\ref{conj:companion-zeros} and~\ref{conj:Psigma-companions}) are conjectural.
 
 \subsection*{Computational Aspects}
-Numerical experiments for the figures were produced by straightforward \(\Theta(\sqrt{x})\) evaluation using quotient-of-sines with resonance guards; the repository contains the scripts and parameter files required to reproduce the figures.\footnote{Repository: \url{https://github.com/SebastianFoxxx/analytic-prime-indicator}}
+Numerical experiments for the figures were produced by straightforward \(\Theta(\sqrt{x})\) evaluation using quotient-of-sines with resonance guards; the repository contains the scripts and parameter files required to reproduce the figures and the interval-arithmetic certificates of Section~\ref{subsec:Psigma-right} (directory \texttt{src/certificates}).\footnote{Repository: \url{https://github.com/SebastianFoxxx/analytic-prime-indicator}}
 
 % ---------------------------------------------------------------------------
 

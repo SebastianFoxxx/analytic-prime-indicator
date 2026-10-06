@@ -1,0 +1,39 @@
+  G1 t=18/100: Arb [0.00184562691819135325 +/- 3.33e-23]  |Arb-mpmath|=1.28e-54
+  G1 t=3/10: Arb [0.0199815559389882800 +/- 3.77e-20]  |Arb-mpmath|=4.96e-53
+  G1 t=1/2: Arb [0.109040090135514528 +/- 8.92e-20]  |Arb-mpmath|=1.29e-51
+  G1 t=9/10: Arb [0.432707972152756406 +/- 1.31e-20]  |Arb-mpmath|=4.43e-52
+  G1 t=99/100: Arb [0.456650337250142103 +/- 1.01e-19]  |Arb-mpmath|=4.42e-52
+  G1 t=999/1000: Arb [0.456562134017040638 +/- 1.26e-19]  |Arb-mpmath|=1.40e-51
+[OK ] G1_arb_gegen_mpmath max Diff 1.40e-51
+  G2 t=18/100: [0.00184562691819 +/- 1.36e-15] gegen bekannt 0.0018456269  (Diff 1.8e-11)
+  G2 t=3/10: [0.0199815559390 +/- 1.18e-14] gegen bekannt 0.019982  (Diff 4.4e-07)
+  G2 t=1/2: [0.109040090136 +/- 4.86e-13] gegen bekannt 0.10904  (Diff 9.0e-08)
+  G2 t=9/10: [0.432707972153 +/- 2.44e-13] gegen bekannt 0.432708  (Diff 2.8e-08)
+[OK ] G2_bekannte_antworten 
+[OK ] G2b_R15_p19_negativ_-0,001117 [-0.001117170070 +/- 4.25e-13]
+  G3 P_inf(23,3/10) direkt (Arb) [4.68037486734903 +/- 6.33e-16], Poisson N=20000: 4.680374865195, Diff 2.15e-09, Schranke 6p/N=6.90e-03
+[OK ] G3_poisson_identitaet 
+  G3 Mutanten: ohne -t: Diff 0.300; w_p(0):=0: Diff 16.947
+[OK ] G3_mutanten_fallen 
+[OK ] G4_lemma2_gewichte 858 Zellen, 0 Verletzungen; Negativkontrolle (erfundenes d/3) 266 Verletzungen
+[OK ] G4_negativkontrolle_faellt 
+[OK ] G5_nur_teiler_d_negativ L=[-0.03634567801 +/- 2.97e-12]
+[OK ] G5_ohne_teilerinput_negativ L=[-0.1158789789 +/- 4.82e-11]
+[OK ] G6_mutanten_verschieben base [0.0018456269 +/- 1.82e-11] M1 [0.023477365 +/- 3.33e-10] (erwartet Verschiebung [0.021631738 +/- 2.51e-10]) M2 [0.0084981028 +/- 3.52e-11]
+  G7 Schwelle 0,0015: ok=True Kaesten 55; 0,0018: ok=True Kaesten 79; 0,0019: ok=False Fehlkaesten 901
+[OK ] G7_schwelle_0,0015_besteht 
+[OK ] G7_schwelle_0,0018_besteht_und_teilt 
+[OK ] G7_schwelle_0,0019_FAELLT 
+[OK ] G7_fehlkasten_am_linken_rand Fehlkasten [0.180704, 0.180705]
+[OK ] G7_kontrolle_R15_p19_faellt 
+[OK ] G7_taylor_0,0015_besteht Kaesten 255
+[OK ] G7_taylor_0,0019_FAELLT 
+  G8 s in [0,0.001]: sinc^2 in [1.0000 +/- 3.29e-6]
+  G8 s in [0,0.05]: sinc^2 in [1.0 +/- 8.24e-3]
+  G8 s in [0,0.3]: sinc^2 in [+/- 1.17]
+[OK ] G8_sinc_reihe_einschluss 
+[OK ] G8_sinc_weite 
+[OK ] G9_urteil_praezisionsunabhaengig 100 bit: 55 Kaesten, 300 bit: 55
+[OK ] G10_restglied_T19_ueber_hurwitz 39 Punkte, kleinster relativer Abstand 2.59e-02
+
+GATE E7926: GRUEN  (21/21 Pruefungen)

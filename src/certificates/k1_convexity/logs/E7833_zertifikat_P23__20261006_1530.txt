@@ -1,0 +1,5 @@
+E7833 Zertifikat P23 uniform 2026-10-06 13:50
+Klasse 1 (p >= 31) C=3,25: ok=True Zielmarge=0.5  P''/p >= 0.9084107096323574  bei t in [0.00000, 0.00281]  E=2.513e-05  ratio_ok=True  t-Boxen=64
+Klasse 1: kleinstes zertifiziertes C auf dem Raster = 1.25
+Klasse 5 (p >= 23) C=3,25: ok=True Zielmarge=0.5  P''/p >= 0.821911663062404  bei t in [0.00000, 0.00281]  E=1.139e-04  ratio_ok=True  t-Boxen=64
+Klasse 5: kleinstes zertifiziertes C auf dem Raster = 1.25

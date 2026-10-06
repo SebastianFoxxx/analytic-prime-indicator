@@ -1,0 +1,40 @@
+E7827 Gate T36-F-1198 R1 - 2026-10-06 13:33
+== V1/V2 Zerlegung und Randformel
+  p=5 mult=1.0 t=0.03: P''=7.4917896230  |Delta_Zerl|=6.43e-40  |Delta_Rand|=0.00e+00  A=5.375003 Be=2.125502 Br=-8.716e-03
+  p=5 mult=1.0 t=0.1: P''=16.4399600649  |Delta_Zerl|=1.10e-39  |Delta_Rand|=0.00e+00  A=10.733710 Be=5.709831 Br=-3.581e-03
+  p=5 mult=1.0 t=0.18: P''=22.2862031183  |Delta_Zerl|=2.20e-39  |Delta_Rand|=2.22e-16  A=16.785374 Be=5.496338 Br=4.491e-03
+  p=5 mult=2.0 t=0.03: P''=10.3205466239  |Delta_Zerl|=1.10e-39  |Delta_Rand|=1.11e-16  A=6.500531 Be=3.820017 Br=-7.393e-07
+  p=5 mult=2.0 t=0.1: P''=17.8778358294  |Delta_Zerl|=7.35e-40  |Delta_Rand|=1.11e-16  A=13.670951 Be=4.206885 Br=1.037e-07
+  p=5 mult=2.0 t=0.18: P''=20.0908686172  |Delta_Zerl|=7.35e-40  |Delta_Rand|=4.16e-17  A=19.379348 Be=0.711516 Br=4.522e-06
+  p=7 mult=1.0 t=0.03: P''=14.0535205493  |Delta_Zerl|=0.00e+00  |Delta_Rand|=5.55e-17  A=10.798097 Be=3.257454 Br=-2.031e-03
+  p=7 mult=1.0 t=0.1: P''=23.1904861785  |Delta_Zerl|=1.47e-39  |Delta_Rand|=0.00e+00  A=15.559482 Be=7.631701 Br=-6.970e-04
+  p=7 mult=1.0 t=0.18: P''=26.2749677681  |Delta_Zerl|=7.35e-40  |Delta_Rand|=0.00e+00  A=20.739445 Be=5.534225 Br=1.297e-03
+  p=7 mult=2.0 t=0.03: P''=18.0884101284  |Delta_Zerl|=1.10e-39  |Delta_Rand|=1.11e-16  A=12.511462 Be=5.576948 Br=-1.819e-08
+  p=7 mult=2.0 t=0.1: P''=23.0709249419  |Delta_Zerl|=3.67e-39  |Delta_Rand|=1.11e-16  A=19.315490 Be=3.755435 Br=5.137e-09
+  p=7 mult=2.0 t=0.18: P''=23.4015646080  |Delta_Zerl|=7.35e-40  |Delta_Rand|=4.86e-17  A=23.339805 Be=0.061760 Br=1.850e-07
+  p=11 mult=1.0 t=0.03: P''=35.3566661395  |Delta_Zerl|=2.94e-39  |Delta_Rand|=0.00e+00  A=29.632440 Be=5.724480 Br=-2.533e-04
+  p=11 mult=1.0 t=0.1: P''=51.6430349825  |Delta_Zerl|=7.35e-39  |Delta_Rand|=0.00e+00  A=40.967645 Be=10.675453 Br=-6.368e-05
+  p=11 mult=1.0 t=0.18: P''=56.3429522267  |Delta_Zerl|=6.61e-39  |Delta_Rand|=0.00e+00  A=51.401810 Be=4.940914 Br=2.280e-04
+  p=11 mult=2.0 t=0.03: P''=41.6653991530  |Delta_Zerl|=8.08e-39  |Delta_Rand|=1.11e-16  A=32.603224 Be=9.062176 Br=-1.099e-10
+  p=11 mult=2.0 t=0.1: P''=48.7348612605  |Delta_Zerl|=1.10e-38  |Delta_Rand|=2.78e-17  A=45.966093 Be=2.768768 Br=6.042e-11
+  p=11 mult=2.0 t=0.18: P''=53.5487608234  |Delta_Zerl|=2.94e-39  |Delta_Rand|=2.78e-17  A=53.899554 Be=-0.350793 Br=2.512e-09
+V1 Verletzungen 0/18 ; V2 Verletzungen 0/18
+== V3 g0'' und g_rho''
+  g0''(0.0): Reihe -6.579736267392906 Ref -6.579736267392906 |D|=0.0e+00 rad=3.3e-47
+  g0''(0.01): Reihe -6.574542031404881 Ref -6.574542031404881 |D|=0.0e+00 rad=1.1e-46
+  g0''(0.1): Reihe -6.069302590874353 Ref -6.069302590874353 |D|=0.0e+00 rad=4.7e-40
+  g0''(0.18): Reihe -4.990113489881958 Ref -4.990113489881958 |D|=0.0e+00 rad=2.1e-32
+V3 Verletzungen 0
+== V4 Soundness (96 Zellen)
+V4 Zellen 96: (a) 0  (b) 0  (c) 0 Verletzungen; kleinster Abstand P'' - Schranke = 0.0334
+== V5 Mutanten / V6 Erreichbarkeit
+  M1_R3: ok=False fails=26 boxes=17
+  M2_flipV: ok=False fails=3 boxes=29
+  M3_C0.3: ok=False fails=64 boxes=0
+  M4_keineTeiler: ok=False fails=64 boxes=0
+  M5_sigma0_0.5: ok=False fails=64 boxes=0
+  V6 p=5 C=3,25 first_split=1: ok=True boxes=11 (muss > 1 sein) ; fails-Zweig durch Mutanten erreicht: True
+== V7 Positivkontrolle
+  p=5, C=6,4: wahres min P''/p (Raster) = 0.7063  Intervallschranke = 0.534666205014484
+== Ergebnis Gate: {'V1': True, 'V2': True, 'V3': True, 'V4': True, 'V5': True, 'V6': True, 'V7': True}
+GATE GRUEN (7 s)

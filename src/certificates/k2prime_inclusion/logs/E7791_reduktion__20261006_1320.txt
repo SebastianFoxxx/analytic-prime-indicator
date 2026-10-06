@@ -1,0 +1,17 @@
+E7791 Reduktion p>=23, Intervallzertifikat (mpmath.iv, Soundness angenommen)
+  C =  3.00: zertifiziert = False  (max Delta_up+D0 = 0.001500, Ziel 0.0015; 52 Intervalle)
+  C =  3.04: zertifiziert = False  (max Delta_up+D0 = 0.001500, Ziel 0.0015; 53 Intervalle)
+  C =  3.05: zertifiziert = True  (max Delta_up+D0 = 0.001497, Ziel 0.0015; 18 Intervalle)
+  C =  3.10: zertifiziert = True  (max Delta_up+D0 = 0.001486, Ziel 0.0015; 10 Intervalle)
+  C =  3.20: zertifiziert = True  (max Delta_up+D0 = 0.001471, Ziel 0.0015; 7 Intervalle)
+  C =  3.30: zertifiziert = True  (max Delta_up+D0 = 0.001315, Ziel 0.0015; 7 Intervalle)
+  C =  6.40: zertifiziert = True  (max Delta_up+D0 = 0.001031, Ziel 0.0015; 1 Intervalle)
+R1 kleinstes zertifiziertes C (Raster 0,01 ab 3,00): 3.05; C=6,4: True, C=3,3: True
+R1 ok
+R5 C=3,0 nicht zertifizierbar: ok
+R4 Mutant M2 (ln 5 statt ln 23) bei C=3,3 zertifizierbar? False -> ok (faellt wie vorgesehen)
+R2 C=3.3: Verletzungen (omega E + D)/p <= Delta_up: 0 ueber 425 Primzahlen; max lhs/Delta_up = 1.0000
+R2 C=6.4: Verletzungen (omega E + D)/p <= Delta_up: 0 ueber 425 Primzahlen; max lhs/Delta_up = 1.0000
+R2 ok
+R3 Mutant M1 (g_1009 statt g_24): Verletzungen an p=23: 2318 -> ok (faellt)
+ERGEBNIS: GRUEN; kleinstes zertifiziertes C fuer p>=23: 3.05

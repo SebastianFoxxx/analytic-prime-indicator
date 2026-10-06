@@ -1,0 +1,25 @@
+E7832 Gate P23 uniform 2026-10-06 13:49
+W1: 52836 (p, rho)-Paare, Verletzungen 0
+== W2 Soundness
+W2: 176 Zellen, Verletzungen (a,b,c,d) = [0, 0, 0, 0], kleinster Abstand P'' - Schranke = 27.0995
+== W3 U,V(u)
+W3: Verletzungen 0
+== W4 E(p) nichtsteigend
+  p0=23: E = 1.139e-04  ratio_ok=True
+  p0=31: E = 2.513e-05  ratio_ok=True
+  p0=41: E = 6.113e-06  ratio_ok=True
+  p0=101: E = 6.450e-08  ratio_ok=True
+  p0=1009: E = 5.560e-13  ratio_ok=True
+  p0=10007: E = 4.439e-18  ratio_ok=True
+  p0=1000000: E = 2.023e-28  ratio_ok=True
+== W5 Mutanten / W6
+  Klasse 1 M1_nurParitaet: ok=False fails=8 boxes=19
+  Klasse 1 M2_R1: ok=False fails=24 boxes=73
+  Klasse 1 M5_C0.5: ok=False fails=128 boxes=0
+  Klasse 1 M3_flipV: ok=False fails=77 boxes=25
+  Klasse 1 M4_ohne_s_Einschraenkung: ok=False fails=69 boxes=15
+  Klasse 5 M1_nurParitaet: ok=False fails=13 boxes=18
+  Klasse 5 M2_R1: ok=False fails=17 boxes=14
+  Klasse 5 M5_C0.5: ok=False fails=128 boxes=0
+== Ergebnis Gate: {'W1': True, 'W2': True, 'W3': True, 'W4': True, 'W5': True, 'W6': True}
+GATE GRUEN (19 s)

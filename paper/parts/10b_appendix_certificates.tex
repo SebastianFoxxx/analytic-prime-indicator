@@ -1,0 +1,89 @@
+
+% ---------------------------------------------------------------------------
+\section{Computer-assisted steps in the proof of Proposition~\ref{prop:Psigma-unique}}\label{app:certificates}
+
+This appendix describes how Lemmas~\ref{lem:Psigma-convex} and~\ref{lem:Psigma-inclusion} are established and states, step by step, which parts are proved by hand and which rest on interval arithmetic. The computations are carried out with ball arithmetic (Arb~\cite{johansson2017arb}, accessed through python-flint~\cite{pythonflint}) and, for some steps, with interval arithmetic in mpmath~\cite{mpmath}. Here ``certified'' means: the parameter box is covered by finitely many sub-boxes, and on each one a rigorously computed lower bound is positive. The soundness of the libraries is assumed; nothing in this appendix is formally verified. The scripts, the logs of the runs quoted here and a short \texttt{README} are in the repository directory \texttt{src/certificates}.
+
+\subsection{A representation by poles}
+For $0\le t<1$ and $\rho\in\mathbb Z$ put
+\[
+g_\rho(t):=\frac{\sin^2(\pi t)}{\pi^2(\rho+t)^2},\qquad \sum_{\rho\in\mathbb Z}g_\rho(t)=1
+\]
+(the partial-fraction expansion of $\csc^2$ at $z=t$). By Proposition~\ref{prop:RPF}, for $i\ge2$ and $x=p+t$,
+\[
+\frac{F(x,i)}{i^2}=\sum_{n\in\{ik:k\in\mathbb Z\}}g_{p-n}(t).
+\]
+All terms are non-negative, so the double series may be rearranged, and
+\begin{equation}\label{eq:pole-rep}
+\mathcal P_\sigma(p+t;\kappa)=\sum_{\rho\in\mathbb Z}W(\rho,t)\,g_\rho(t)-p-t,\qquad
+W(\rho,t):=\sum_{\substack{i\ge2\\ i\mid(p-\rho)}}i\,\phi_\kappa\!\Bigl(\frac{i}{p+t+1}\Bigr),
+\end{equation}
+where for $\rho=p$ every $i\ge2$ divides $p-\rho=0$. For $\kappa=\infty$ the weights become $w_p(\rho):=\sum_{i\mid(p-\rho),\,2\le i\le p+1}i$, and for $0<t<1$ the limit function $\mathcal P_\infty(p+t):=\sum_{2\le i\le p+1}F(p+t,i)/i-(p+t)$ equals $\sum_\rho(w_p(\rho)-p)g_\rho(t)-t$. Only $\rho=0$ and the finitely many $\rho$ with small $|\rho|$ matter in what follows.
+
+\subsection{Inclusion for $\kappa=\infty$ (hand-checkable part and one certificate)}
+\begin{lemma}[Guaranteed divisors]\label{lem:guaranteed}
+Let $p$ be an odd prime, $R\le p-4$, $0<|\rho|\le R$ and $d:=p-\rho$. Then $w_p(\rho)\ge d+\tfrac d2$ for $\rho=-1$ and for odd $\rho\ge1$; $w_p(\rho)\ge d$ for even $\rho\ge2$; $w_p(\rho)\ge\tfrac{p+|\rho|}{2}$ for odd $\rho\le-3$; and $w_p(\rho)\ge0$ for even $\rho\le-2$. Moreover $w_p(0)=p$.
+\end{lemma}
+\begin{proof}
+$d$ and, if $d$ is even, $d/2$ are divisors of $d$ in the range $[2,p+1]$ as long as $R\le p-4$ (for $\rho\le-2$ only $d/2\le p+1$ is admissible); the parity of $d$ is that of $\rho+1$ because $p$ is odd. For $\rho=0$ the only divisor of $p$ in $[2,p+1]$ is $p$.
+\end{proof}
+For $0<t<1$ and $R\ge2$ the tail satisfies $\sum_{|\rho|>R}g_\rho(t)\le T_R(t):=\frac{\sin^2(\pi t)}{\pi^2}\frac{2R}{R^2-t^2}$ (compare the series with $\int_R^\infty(u\pm t)^{-2}\,du$). With $c(-1)=\tfrac12$, $c(\rho)=\tfrac12$ for odd and $0$ for even $\rho\ge1$, and $c(\rho)=-\tfrac12$ for odd and $-1$ for even $\rho\le-2$, one obtains for $p\ge R+4$
+\begin{equation}\label{eq:LR}
+\frac{\mathcal P_\infty(p+t)}{p}\ \ge\ L_R(p,t):=\sum_{0<|\rho|\le R}c(\rho)g_\rho(t)-\frac{3}{2p}\sum_{\rho=1}^{R}\rho\,g_\rho(t)-T_R(t)-\frac tp .
+\end{equation}
+For $R=19$ the only $p$-dependent terms are $-\tfrac3{2p}\sum_{\rho\le19}\rho g_\rho-\tfrac tp$, which increase with $p$. Hence $L_{19}(p,t)\ge L_{19}(23,t)$ for $p\ge23$, and the \emph{certificate} is $L_{19}(23,t)>0.0015$ on $[\tfrac{9}{50},1]$ (value $0.0018456\ldots$ at $t=\tfrac{9}{50}$, attained at the left end; verified in Arb with $200$ bit by two different covers). It follows that
+\begin{equation}\label{eq:Pinf-incl}
+\mathcal P_\infty(p+t)\ \ge\ 0.0015\,p>0\qquad(p\ge23,\ \tfrac9{50}\le t<1).
+\end{equation}
+For $p\in\{5,7,11,13,17,19\}$ the exact integer weights $w_p(\rho)$ are used in a window $|\rho|\le300$ and the same tail bound outside; the resulting lower bounds on $[\tfrac9{50},1]$ are certified in the same way.
+
+\subsection{Inclusion for finite $\kappa$ (Lemma~\ref{lem:Psigma-inclusion})}
+Write $f_i:=F/i^2$ and split, for $0<t<1$,
+\[
+\mathcal P_\sigma=\mathcal P_\infty-(1-\phi_{p+1})E-D+H,\quad
+E:=(p+1)f_{p+1},\ \ D:=\sum_{2\le i\le p}i(1-\phi_i)f_i,\ \ H:=\sum_{i\ge p+2}i\,\phi_if_i,
+\]
+with $\phi_i:=\phi_\kappa(i/(p+t+1))$ and $D\ge0$, $H\ge0$. Hence $\mathcal P_\sigma\ge\mathcal P_\infty-(1-\phi_{p+1})E-D$. Since $1-\phi_{p+1}\le\exp\bigl(-2\kappa t/(p+1+t)\bigr)$ and $0\le f_i\le1$, both defects are bounded by explicit expressions in $p,\kappa,t$. For $p\ge23$ the exponent in the bound of $(1-\phi_{p+1})E/p$ grows with $p$ and $E/p=\tfrac{p+1}{p}\bigl(\operatorname{sinc}(1-t)/\operatorname{sinc}(\tfrac{1-t}{p+1})\bigr)^2$ is bounded by its value at $p=23$, so that the verification reduces to $p=23$; there the sum of the two defects is smaller than $0.0015$ (relative to $p$) on $[\tfrac9{50},1]$ as soon as $\kappa\ge3.05\,(p+1)\ln p$ (interval arithmetic in mpmath). Together with \eqref{eq:Pinf-incl} this gives $\mathcal P_\sigma(p+t)>0$ for $p\ge23$. For $p\le19$ the sum $\Lambda:=\sum_{2\le i\le p+1}i\,\phi_if_i-x\le\mathcal P_\sigma$ is increasing in $\kappa$, so a certificate at the smallest admissible $\kappa$ covers all larger ones; the certified smallest constants $C$ in $\kappa\ge C(p+1)\ln p$ are $3.25,\ 1.2,\ 0.65,\ 0.65,\ 0.5,\ 0.5$ for $p=5,7,11,13,17,19$. For $p=5$ the margin is small: $f(\tfrac9{50})/p=2.5\cdot10^{-4}$ at $C=3.25$, and a direct evaluation puts the sign change of $f(\tfrac9{50})$ at $C\approx3.183$.
+
+\subsection{Convexity (Lemma~\ref{lem:Psigma-convex})}
+Differentiating \eqref{eq:pole-rep} twice gives $f''=A+B$ with
+\[
+A=\sum_\rho W(\rho,t)\,g_\rho''(t),\qquad B=\sum_{i\ge2}i\bigl(\phi_i''f_i+2\phi_i'f_i'\bigr).
+\]
+\emph{Sign of $g_\rho''$.} One computes $g_\rho''(t)=H_\rho(t)/(\pi^2y^4)$ with $y=\rho+t$ and $H_\rho(t)=2\pi^2\cos(2\pi t)\,y^2-4\pi\sin(2\pi t)\,y+6\sin^2(\pi t)$. For $0<t\le\tfrac9{50}$ and $\rho\le-1$ all three summands are non-negative. For $\rho\ge1$, $H_\rho$ is increasing in $y$ on $y\ge1$ because $\tan(2\pi\cdot\tfrac9{50})=2.125<\pi$, so $H_\rho\ge H_{1}$, and $H_1$ is positive on $[0,\tfrac9{50}]$ (a one-variable check; $H_1(\tfrac9{50})=8.09\cdot10^{-3}$, and $H_1$ changes sign at $t\approx0.18005$, which is why the method stops at $\tfrac9{50}$). Only $\rho=0$ contributes negatively, with $g_0''<0$ on $[0,\tfrac9{50}]$ (certified bound $g_0''\le-4.80$).
+
+\emph{Lower bound for $A$.} For $i\le p$ one has $\phi_i\ge\sigma_0:=\sigma(6.5\ln p)$, where $\sigma(s)=(1+e^{-s})^{-1}$, and the weight of the edge index $i=p+1$ is exactly $\phi_{p+1}=\sigma(s)$ with $s:=2\kappa t/(p+1+t)$. Using Lemma~\ref{lem:guaranteed} and its analogues with the additional guaranteed divisors $d/3$ and $d/6$ (they depend on $p\bmod 6$), $A$ is bounded below by $A_0(t)+\sigma(s)A_1(t)$ with explicit finite sums of $g_\rho''$.
+
+\emph{The edge term.} The contribution $B_{\rm edge}$ of the index $p+1$ depends on $\kappa$ only through $s$: $B_{\rm edge}/(p+1)=U(t)\,s^2\sigma''(s)+V(t)\,s\,\sigma'(s)$ with closed-form $U,V>0$ depending on $p$ and $t$ (their formulas are in the scripts). This reduces the $\kappa$-dependence to the plane $(t,s)$, which is covered by boxes; the constraint $\kappa\ge3.25(p+1)\ln p$ enters as $s\ge2\cdot3.25\ln p\,(p+1)t/(p+1+t)$.
+
+\emph{The remainder.} $|B-B_{\rm edge}|\le\varepsilon_p$ with $\varepsilon_p$ an explicit exponentially small bound (Bernstein-type bounds for $f_i'$ and $\sigma'\le e^{-|s|}$): $\varepsilon_5=7.5\cdot10^{-2}$, $\varepsilon_7=1.7\cdot10^{-2}$, and smaller for larger $p$; for all $p\ge23$ one has $\varepsilon_p/p\le1.14\cdot10^{-4}$.
+
+\emph{Certificate.} For $p\in\{5,\dots,19\}$ the lower bounds are certified in Arb (about $65$ boxes in $t$ times $2961$ boxes in $s$ up to $s=40$, with a separate estimate for $s\ge40$). For $p\ge23$ the weights are replaced by their minima over each residue class of $p$ modulo $6$ (classes $1$ and $5$), the dependence on $p$ enters through $u=1/(p+1)\in[0,\tfrac1{24}]$ treated as a ball, and one certificate per class covers all $p\ge23$ ($p\ge31$ for the class $1$). The certified lower bounds for $f''/p$ are those listed in Lemma~\ref{lem:Psigma-convex}; they are weaker than the true values (for instance, at $\kappa=3.25\,(p+1)\ln p$ and $t=0.1$ one finds $f''/p=3.29$ for $p=5$ and $5.24$ for $p=23$, by direct differentiation of \eqref{eq:Psigma}).
+
+\subsection{Status of the steps}
+Table~\ref{tab:cert-status} lists, for each step of the proof of Proposition~\ref{prop:Psigma-unique}, how it is established.
+\begin{table}[!h]
+\centering
+\small
+\begin{tabular}{p{0.37\textwidth}p{0.55\textwidth}}
+\hline
+Step & Status\\
+\hline
+Pole representation \eqref{eq:pole-rep}, $\sum g_\rho=1$ & classical (partial fractions, Tonelli); proved\\
+Guaranteed divisors, tail bound $T_R$ & elementary; proved. Weights additionally checked against exact divisor sums for all primes $23\le p\le2\cdot10^6$ and $38$ values of $\rho$\\
+Certificate $L_{19}(23,t)>0.0015$ & interval arithmetic (Arb, $200$ bit); two independent covers; soundness assumed\\
+Finite $\kappa$, reduction to $p=23$ & elementary monotonicity; defect inequality by interval arithmetic (mpmath); $p\le19$ by interval arithmetic\\
+Sign of $g_\rho''$, $\rho\ne0$ & elementary, plus a one-variable interval check\\
+Convexity, $p\le19$ & interval arithmetic (Arb), explicit $\varepsilon_p$; soundness assumed\\
+Convexity, $p\ge23$ & interval arithmetic (Arb) uniform in $p$ per residue class; \emph{two auxiliary estimates are not proved in detail}: the class minima of the guaranteed weights are computed for $23\le q\le300$ and the limit $q\to\infty$, their validity for all primes $q>300$ rests on a monotonicity argument that is checked exactly for $p\le5000$ but not written out; the bound $\varepsilon_p/p$ is shown to decrease in $p$ by an elementary derivative argument, the constants being confirmed in Arb for $p\le101$\\
+Assembly (Proposition~\ref{prop:Psigma-unique}) & elementary; proved\\
+\hline
+\end{tabular}
+\caption{Status of the steps behind Proposition~\ref{prop:Psigma-unique}. The convexity certificate was reproduced by a second, independently written implementation; the inclusion for $\kappa=\infty$ by three computations (mpmath intervals, exact rational arithmetic, Arb). No step has been formally verified, and no human referee has examined the certificates.}
+\label{tab:cert-status}
+\end{table}
+
+\paragraph*{Reproduction.} From the directory \texttt{src/certificates/k2\_inclusion} run \texttt{E7927\_\ldots} (about one second); from \texttt{k1\_convexity} run the certificate scripts \texttt{E7828\_\ldots} ($p\le19$) and \texttt{E7833\_\ldots} ($p\ge23$) preceded by their gates \texttt{E7827\_\ldots} and \texttt{E7832\_\ldots}; from \texttt{k2prime\_inclusion} run \texttt{E7792\_\ldots} ($p\le19$) and \texttt{E7791\_\ldots} (reduction for $p\ge23$). The requirements are Python~3, python-flint~$0.9$, mpmath~$1.3$ and numpy. The file names carry experiment numbers of the author's working environment; the logs of the runs quoted in this appendix are stored beside the scripts.
+
+\paragraph*{Acknowledgements}
+Valuable discussions and helpful feedback from colleagues are gratefully acknowledged. The computations and analyses in Section~\ref{subsec:Psigma-right} and in this appendix were prepared with the assistance of an AI system (Claude, Anthropic); the content was checked by the author, who is responsible for it.

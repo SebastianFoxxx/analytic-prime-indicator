@@ -1,0 +1,65 @@
+
+% ---------------------------------------------------------------------------
+\subsection{The right zero: quantitative statements}\label{subsec:Psigma-right}
+
+This subsection collects what can be proved about the zero of $\mathcal P_\sigma(\cdot;\kappa)$ to the right of an odd prime $p$, the object of the right-hand part of Conjecture~\ref{conj:Psigma-companions}. Throughout, $p$ is an odd prime and $f(t):=\mathcal P_\sigma(p+t;\kappa)$ for $0\le t\le 1$. The first two statements are elementary consequences of Lemma~\ref{lem:uniform-local-sigma}, Lemma~\ref{lem:Psigma-derivative-at-p} and Proposition~\ref{prop:Psigma-properties}. The third is a \emph{computer-assisted} result: its proof rests on interval-arithmetic certificates (Appendix~\ref{app:certificates}) and is neither formal nor checkable by hand.
+
+\begin{lemma}[Explicit form of $\mathcal P_\sigma'$ at a prime]\label{lem:Psigma-prime-explicit}
+For every prime $p\ge3$ and every $\kappa>0$,
+\begin{equation}\tag{$\dagger$}\label{eq:Psigma-prime}
+\mathcal P_\sigma'(p;\kappa)\;=\;-1+\Bigl(\frac{p}{p+1}\Bigr)^{2}\frac{\kappa}{2}\,\operatorname{sech}^{2}\!\Bigl(\frac{\kappa}{p+1}\Bigr).
+\end{equation}
+If $\kappa\ge (p+1)\ln(8p)$, then
+\[
+\mathcal P_\sigma'(p;\kappa)\;\le\;-1+\frac{\ln(8p)}{32\,(p+1)}\;<\;-\tfrac34 .
+\]
+\end{lemma}
+
+\begin{proof}
+The proof of Lemma~\ref{lem:Psigma-derivative-at-p} gives $\mathcal P_\sigma'(p;\kappa)=-1+S_\sigma'(p;\kappa)$ with $S_\sigma'(p;\kappa)=-\frac{p^{2}}{(p+1)^{2}}\,\phi_\kappa'\bigl(\tfrac{p}{p+1}\bigr)$. Since $\phi_\kappa'(u)=-\tfrac{\kappa}{2}\operatorname{sech}^2(\kappa(u-1))$ and $\operatorname{sech}$ is even, \eqref{eq:Psigma-prime} follows. For the bound put $y:=\kappa/(p+1)\ge\ln(8p)>\tfrac12$. The second term in \eqref{eq:Psigma-prime} equals $\frac{p^2}{2(p+1)}\,y\operatorname{sech}^2 y$, and $\operatorname{sech}^2y\le4e^{-2y}$ bounds it by $\frac{2p^2}{p+1}\,ye^{-2y}$. The function $y\mapsto ye^{-2y}$ is decreasing on $[\tfrac12,\infty)$, so $ye^{-2y}\le \ln(8p)\,(8p)^{-2}$ and the term is at most $\ln(8p)/(32(p+1))$. Finally $\ln(8p)<8(p+1)$ gives $\ln(8p)/(32(p+1))<\tfrac14$.
+\end{proof}
+
+\begin{remark}
+The restriction on $\kappa$ cannot be dropped: $\mathcal P_\sigma'(7;10)=+0.0735\ldots$ by \eqref{eq:Psigma-prime}. Lemma~\ref{lem:Psigma-derivative-at-p} is thus a statement about large $\kappa$ only; the explicit threshold above is sufficient, not sharp (numerically, $\mathcal P_\sigma'(p;\kappa)\le-\tfrac34$ holds from about $\kappa=(1.7\text{--}4.9)\,(p+1)$ on for the primes $3\le p\le 499$).
+\end{remark}
+
+\begin{proposition}[Existence and distance of the right zero for fixed $p$]\label{prop:Psigma-right-fixed}
+Let $p\ge3$ be prime, let $C_p$ be the constant of Lemma~\ref{lem:uniform-local-sigma}, and put $t_0(p):=\min\{1/C_p,\tfrac12\}$. There is $\kappa_0(p)\ge1$ such that for all $\kappa\ge\kappa_0(p)$:
+\begin{enumerate}
+\item[(i)] $\mathcal P_\sigma(p+t;\kappa)<0$ for $0\le t\le t_0(p)$;
+\item[(ii)] $\mathcal P_\sigma(p+1;\kappa)>0$.
+\end{enumerate}
+Consequently, $\mathcal P_\sigma(\cdot;\kappa)$ has at least one zero in $(p+t_0(p),\,p+1)$ and no zero in $[p,\,p+t_0(p)]$.
+\end{proposition}
+
+\begin{proof}
+By Taylor's formula with integral remainder and Lemma~\ref{lem:uniform-local-sigma}, $f(t)\le f(0)+f'(0)\,t+\tfrac12C_pt^2$ for $0\le t\le\tfrac12$ and all $\kappa\ge1$. Here $f(0)=-p\bigl(1+e^{2\kappa/(p+1)}\bigr)^{-1}<0$ (Remark~\ref{rem:integer-eval-smooth}), and $f'(0)\le-\tfrac34$ for $\kappa\ge(p+1)\ln(8p)$ by Lemma~\ref{lem:Psigma-prime-explicit}. For $0<t\le t_0(p)$ one has $\tfrac12C_pt^2\le\tfrac12t$, hence $f(t)<-\tfrac34t+\tfrac12t<0$, which is (i). For (ii), $p+1$ is even and at least $4$, so $\sigma(p+1)\ge1+\tfrac{p+1}{2}+(p+1)$ and $\sigma(p+1)-(p+1)-1\ge\tfrac{p+1}{2}>0$; by Proposition~\ref{prop:Psigma-properties}, $\mathcal P_\sigma(p+1;\kappa)\to\sigma(p+1)-(p+1)-1$ as $\kappa\to\infty$, which gives (ii) for $\kappa$ large. Choose $\kappa_0(p)$ accordingly. The zero exists by the intermediate value theorem on $[p+t_0(p),p+1]$.
+\end{proof}
+
+\begin{remark}\label{rem:right-zero-limit}
+Proposition~\ref{prop:Psigma-right-fixed} shows, for each fixed prime $p$, that the right zero stays bounded away from $p$ as $\kappa\to\infty$. It gives no uniformity in $p$ ($t_0(p)$ depends on $C_p$), no uniqueness (see Proposition~\ref{prop:Psigma-unique}), and no convergence of the distance, which is what Conjecture~\ref{conj:Psigma-companions} asserts. Numerically (direct evaluation of \eqref{eq:Psigma}), the zero of $\mathcal P_\sigma(\cdot;\kappa)$ in $(p,p+\tfrac12)$ approaches the first zero to the right of $p$ of the limit function $\mathcal P_\infty(x)=\sum_{2\le i<x+1}F(x,i)/i-x$: for $p=5$ it lies at distance $0.1792,\ 0.1603,\ 0.1543,\ 0.15329$ from $p$ for $\kappa=31.4,\ 60,\ 100,\ 400$, and the limit function has its zero at $5.15328732\ldots$; for $p=7$ the corresponding distances are $0.1424,\ 0.1227,\ 0.1120,\ 0.1054$. This is an observation, not a theorem.
+\end{remark}
+
+\begin{lemma}[Convexity to the right of $p$; computer-assisted]\label{lem:Psigma-convex}
+Let $p\ge5$ be prime and $\kappa\ge3.25\,(p+1)\ln p$. Then $f''(t)>0$ for $0\le t\le\tfrac{9}{50}$. More precisely $f''(t)\ge c_p\,p$ there, with certified constants $c_p\ge0.601,\ 1.031,\ 2.203,\ 0.508,\ 1.976,\ 1.836$ for $p=5,7,11,13,17,19$, and $c_p\ge0.908$ for $p\equiv1\pmod 6$, $p\ge31$, and $c_p\ge0.821$ for $p\equiv5\pmod 6$, $p\ge23$.
+\end{lemma}
+
+\begin{lemma}[Inclusion; computer-assisted]\label{lem:Psigma-inclusion}
+Let $p\ge5$ be prime and $\kappa\ge3.25\,(p+1)\ln p$. Then $f(0)=-p\bigl(1+e^{2\kappa/(p+1)}\bigr)^{-1}<0$, and $f(t)>0$ for all $t\in[\tfrac{9}{50},1)$. For the inclusion alone, the constant $3.25$ may be lowered: $\kappa\ge3.05\,(p+1)\ln p$ suffices for $p\ge23$, and $\kappa\ge C\,(p+1)\ln p$ with $C=1.2,\ 0.65,\ 0.65,\ 0.5,\ 0.5$ for $p=7,11,13,17,19$. The case $p=5$ is tight: at $\kappa=3.25\cdot6\ln5$ one has $f(\tfrac{9}{50})/p=2.5\cdot10^{-4}$, and the sign of $f(\tfrac{9}{50})$ changes at $\kappa\approx3.183\cdot6\ln5$.
+\end{lemma}
+
+\begin{proposition}[Uniqueness of the right zero for large $\kappa$; computer-assisted]\label{prop:Psigma-unique}
+Let $p\ge5$ be prime and $\kappa\ge3.25\,(p+1)\ln p$. Then $\mathcal P_\sigma(\cdot;\kappa)$ has exactly one zero $z$ in $(p,p+1)$. This zero is simple, it satisfies $0<z-p<0.18$, and $\mathcal P_\sigma(\cdot;\kappa)<0$ on $[p,z)$ and $>0$ on $(z,p+1)$.
+\end{proposition}
+
+\begin{proof}[Proof, given Lemmas~\ref{lem:Psigma-convex} and~\ref{lem:Psigma-inclusion}]
+By Proposition~\ref{prop:Psigma-properties}, $f$ is $C^\infty$. By Lemma~\ref{lem:Psigma-convex}, $f$ is strictly convex on $[0,\tfrac{9}{50}]$. By Lemma~\ref{lem:Psigma-inclusion}, $f(0)<0<f(\tfrac{9}{50})$, so $f$ has a zero in $(0,\tfrac{9}{50})$. If $0<z_1<z_2\le\tfrac{9}{50}$ were two zeros, then $z_1=\lambda\cdot0+(1-\lambda)z_2$ with $\lambda=1-z_1/z_2\in(0,1)$ and convexity gives $0=f(z_1)\le\lambda f(0)+(1-\lambda)f(z_2)=\lambda f(0)<0$, a contradiction. So the zero $z\in(0,\tfrac{9}{50})$ is unique in $[0,\tfrac{9}{50}]$, and $f<0$ on $[0,z)$ by continuity. Convexity also gives $f'(z)\ge(f(z)-f(0))/z=-f(0)/z>0$, so $z$ is simple, and $f(t)\ge f'(z)(t-z)>0$ on $(z,\tfrac{9}{50}]$. On $[\tfrac{9}{50},1)$ the function is positive by Lemma~\ref{lem:Psigma-inclusion}.
+\end{proof}
+
+\begin{corollary}\label{cor:Psigma-unique-fixed}
+Let $p\ge5$ be prime and $\kappa\ge\max\{\kappa_0(p),\,3.25\,(p+1)\ln p\}$. Then the zero in $(p,p+1)$ of Proposition~\ref{prop:Psigma-right-fixed} is the unique zero of $\mathcal P_\sigma(\cdot;\kappa)$ in $(p,p+1)$, and it lies in $(p+t_0(p),\,p+0.18)$.
+\end{corollary}
+
+\begin{remark}[Scope and status]\label{rem:right-zero-scope}
+Proposition~\ref{prop:Psigma-unique} is a statement for one object: $\mathcal P_\sigma$ of \eqref{eq:Psigma} with finite $\kappa$ and a prime $p\ge5$. It says nothing about $\kappa<3.25\,(p+1)\ln p$ (numerically, exactly one zero in $(p,p+1)$ was observed for $130$ primes $5\le p\le3001$ at $\kappa=C\,(p+1)\ln p$ with $C$ as small as $0.05$ for $p\le701$), nothing about the zero to the left of $p$ (Lemma~\ref{lem:Psigma-left-zero}), nothing about $\mathcal P_\tau$, and it does not prove Conjecture~\ref{conj:Psigma-companions}: the stabilisation of the distance as $\kappa\to\infty$ and the uniformity in $p$ remain open. The constant $\tfrac{9}{50}$ is the limit of the method (the second derivative of the pole term $g_1$ in Appendix~\ref{app:certificates} changes sign at $t\approx0.18005$), not of the convexity itself. The proofs of the two lemmas combine classical identities and elementary estimates with interval-arithmetic certificates; the status of every step is listed in Table~\ref{tab:cert-status}. For primes $p\ge23$ two analytic auxiliary estimates are verified numerically and argued by monotonicity but not proved in full detail; the proposition should be read with this qualification.
+\end{remark}

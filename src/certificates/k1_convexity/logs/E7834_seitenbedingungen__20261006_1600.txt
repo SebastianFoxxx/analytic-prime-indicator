@@ -1,0 +1,12 @@
+S1: g0'' auf [0, 9/50]: Ball [+/- 7.52]  Obergrenze -4.809814863281666
+S2: V > 0: Verletzungen 0 / 1810 Boxen ; S3: A1 >= 0: Verletzungen 0
+S4: p=5: ok=True Boxen 64  lueckenlos=True  [0.0, 0.18000000000000002]
+S4: p=7: ok=True Boxen 64  lueckenlos=True  [0.0, 0.18000000000000002]
+S4: p=11: ok=True Boxen 64  lueckenlos=True  [0.0, 0.18000000000000002]
+S4: p=13: ok=True Boxen 64  lueckenlos=True  [0.0, 0.18000000000000002]
+S4: p=17: ok=True Boxen 64  lueckenlos=True  [0.0, 0.18000000000000002]
+S4: p=19: ok=True Boxen 64  lueckenlos=True  [0.0, 0.18000000000000002]
+S4: Klasse 1: ok=True Boxen 64  lueckenlos=True  [0.0, 0.18000000000000002]
+S4: Klasse 5: ok=True Boxen 64  lueckenlos=True  [0.0, 0.18000000000000002]
+S5: s-Gitter lueckenlos True; Rest-Schutz True
+Ergebnis: {'S1': True, 'S2': True, 'S3': True, 'S4': True, 'S5': True}

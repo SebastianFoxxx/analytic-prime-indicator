@@ -1,0 +1,23 @@
+Kette P_inf/p >= L_19(p,t) gegen Direktsumme (Arb, 110 Bit): 231 Primzahlen 23..1500 x 14 t + 9 grosse Primzahlen ([4001, 8009, 16001, 32003, 65003, 100003, 101573, 161033, 171299]) x 5 t
+Zellen 3288, Verletzungen der Kette 0; Verletzungen der Schwelle P/p >= 0,0015: 0
+Mutanten: M1 543 Verletzungen, M2 0 Verletzungen
+Kleinster Schlupf P/p - L_19 je t (Arb-Untergrenze):
+   t=0.180000: 0.036343 (p=997)
+   t=0.190000: 0.039728 (p=997)
+   t=0.200000: 0.043166 (p=997)
+   t=0.250000: 0.060630 (p=877)
+   t=0.300000: 0.077179 (p=877)
+   t=0.400000: 0.102229 (p=877)
+   t=0.500000: 0.110269 (p=877)
+   t=0.600000: 0.099181 (p=877)
+   t=0.700000: 0.073122 (p=877)
+   t=0.800000: 0.041081 (p=1381)
+   t=0.900000: 0.013277 (p=1381)
+   t=0.950000: 0.005319 (p=1381)
+   t=0.990000: 0.002549 (p=1453)
+   t=0.999999: 0.002409 (p=1453)
+Kleinstes P_inf/p je Restklasse mod 6 (Arb-Untergrenze, alle t, p >= 23):
+   p = 1 mod 6: min P/p = 0.048649 bei p = 37, t = 0.18   (bei t=0,18: 0.048649, p = 37)
+   p = 5 mod 6: min P/p = 0.060360 bei p = 653, t = 0.18   (bei t=0,18: 0.060360, p = 653)
+kleinster relativer Schlupf (Schlupf/L_19) ueber alle t: 0.0048
+ERGEBNIS E7929: GRUEN  (15s)
