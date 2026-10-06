@@ -37,7 +37,7 @@ For $R=19$ the only $p$-dependent terms are $-\tfrac3{2p}\sum_{\rho\le19}\rho g_
 \end{equation}
 For $p\in\{5,7,11,13,17,19\}$ the exact integer weights $w_p(\rho)$ are used in a window $|\rho|\le300$ and the same tail bound outside; the resulting lower bounds on $[\tfrac9{50},1]$ are certified in the same way.
 
-\subsection{Inclusion for finite $\kappa$ (Lemma~\ref{lem:Psigma-inclusion})}
+\subsection{Inclusion for finite $\kappa$ (Lemma~\ref{lem:Psigma-inclusion})}\label{subsec:finite-kappa}
 Write $f_i:=F/i^2$ and split, for $0<t<1$,
 \[
 \mathcal P_\sigma=\mathcal P_\infty-(1-\phi_{p+1})E-D+H,\quad
@@ -146,7 +146,7 @@ because $i\ge25$, $\ell\ge\ell(23)=20.38\ldots$ (the left-hand side is below $2\
 
 The bound is not sharp: evaluated directly (mpmath), $|B_{\rm rest}|$ is smaller than $p\,\varepsilon(p)$ by a factor of at least $2\cdot10^2$ in $4864$ cases with $23\le p\le10007$, $\kappa/\kappa_{\min}\in\{1,1.2,2,5\}$. For the finitely many $p\le19$ the same term bound is summed for each $p$ separately (with the maximum of $f_i$ over $0\le t\le\tfrac9{50}$ in place of $1$ for $i\ge p+2$, and the terms $i\ge p+62$ bounded by twice the first of them); this gives \emph{absolute} bounds $|B_{\rm rest}|\le\varepsilon_p$ with $\varepsilon_5=7.5\cdot10^{-2}$, $\varepsilon_7=1.7\cdot10^{-2}$, and smaller values for larger $p$. (Thus $\varepsilon_p$ for $p\le19$ is an absolute bound, whereas $\varepsilon(p)$ for $p\ge23$ is a bound relative to $p$.)
 
-\emph{Certificate.} For $p\in\{5,\dots,19\}$ the lower bounds are certified in Arb (about $65$ boxes in $t$ times $2961$ boxes in $s$ up to $s=40$, with a separate estimate for $s\ge40$). For $p\ge23$ the weights are replaced by the exact class numbers $c_a^{(r)},c_b^{(r)}$ of Lemma~\ref{lem:class-weights} (classes $r=1$ and $r=5$), $\varepsilon(p)$ by $\varepsilon(p_r)$ (Lemma~\ref{lem:remainder}), the dependence on $p$ enters through $u=1/(p+1)\in[0,\tfrac1{p_r+1}]$ treated as a ball, and one certificate per class covers all $p\ge p_r$. All $p$-dependent ingredients are used in the monotone direction: $\sigma_0\ge\sigma(6.5\ln p_r)$, the lower bound for $s$ increases with $p$, $(p+1)/p\le(p_r+1)/p_r$, and $\varepsilon(p)\le\varepsilon(p_r)$. The certified lower bounds for $f''/p$ are those listed in Lemma~\ref{lem:Psigma-convex}; they are weaker than the true values (for instance, at $\kappa=3.25\,(p+1)\ln p$ and $t=0.1$ one finds $f''/p=3.29$ for $p=5$ and $5.24$ for $p=23$, by direct differentiation of \eqref{eq:Psigma}).
+\emph{Certificate.} For $p\in\{5,\dots,19\}$ the lower bounds are certified in Arb (about $65$ boxes in $t$ times $2961$ boxes in $s$ up to $s=40$, with a separate estimate for $s\ge40$). For $p\ge23$ the weights are replaced by the exact class numbers $c_a^{(r)},c_b^{(r)}$ of Lemma~\ref{lem:class-weights} (classes $r=1$ and $r=5$), $\varepsilon(p)$ by $\varepsilon(p_r)$ (Lemma~\ref{lem:remainder}), the dependence on $p$ enters through $u=1/(p+1)\in[0,\tfrac1{p_r+1}]$ treated as a ball, and one certificate per class covers all $p\ge p_r$. All $p$-dependent ingredients are used in the monotone direction: $\sigma_0\ge\sigma(6.5\ln p_r)$, the lower bound for $s$ increases with $p$, $(p+1)/p\le(p_r+1)/p_r$ (this factor multiplies $U s^2\sigma''\le0$, where it is bounded above by $(p_r+1)/p_r$, and $V s\sigma'\ge0$, where it is simply dropped, being $\ge1$ with $V>0$ certified), and $\varepsilon(p)\le\varepsilon(p_r)$. The certified lower bounds for $f''/p$ are those listed in Lemma~\ref{lem:Psigma-convex}; they are weaker than the true values (for instance, at $\kappa=3.25\,(p+1)\ln p$ and $t=0.1$ one finds $f''/p=3.29$ for $p=5$ and $5.24$ for $p=23$, by direct differentiation of \eqref{eq:Psigma}).
 
 \subsection{Status of the steps}
 Table~\ref{tab:cert-status} lists, for each step of the proof of Proposition~\ref{prop:Psigma-unique}, how it is established.
@@ -160,7 +160,7 @@ Step & Status\\
 Pole representation \eqref{eq:pole-rep}, $\sum g_\rho=1$ & classical (partial fractions, Tonelli); proved\\
 Guaranteed divisors, tail bound $T_R$ & elementary; proved. Weights additionally checked against exact divisor sums for all primes $23\le p\le2\cdot10^6$ and $38$ values of $\rho$\\
 Certificate $L_{19}(23,t)>0.0015$ & interval arithmetic (Arb, $200$ bit); two independent covers; soundness assumed\\
-Finite $\kappa$, reduction to $p=23$ & elementary monotonicity, proved in C.3 (steps (i)--(iii)); the resulting one-variable inequality $\sup_t\Delta_C(t)<0.0015$ by interval arithmetic (mpmath, repeated in Arb); $p\le19$ by interval arithmetic\\
+Finite $\kappa$, reduction to $p=23$ & elementary monotonicity, proved in Section~\ref{subsec:finite-kappa} (steps (i)--(iii)); the resulting one-variable inequality $\sup_t\Delta_C(t)<0.0015$ by interval arithmetic (mpmath, repeated in Arb); $p\le19$ by interval arithmetic\\
 Sign of $g_\rho''$, $\rho\ne0$ & elementary, plus a one-variable interval check\\
 Edge term, formulas for $U,V$ & direct differentiation; proved (checked numerically); $V>0$ by interval arithmetic\\
 Class weights (Lemma~\ref{lem:class-weights}), lower bound for $A$ (Lemma~\ref{lem:A-bound}) & elementary; proved. Finite part ($q\le300$) in exact rational arithmetic; additionally checked against all primes $p_r\le p\le6\cdot10^6$ and $0<|\rho|\le40$\\
@@ -170,7 +170,7 @@ Convexity, $p\ge23$ & interval arithmetic (Arb) uniform in $p$ per residue class
 Assembly (Proposition~\ref{prop:Psigma-unique}) & elementary; proved\\
 \hline
 \end{tabular}
-\caption{Status of the steps behind Proposition~\ref{prop:Psigma-unique}. The convexity certificate was reproduced by a second, independently written implementation (also AI-assisted); the inclusion for $\kappa=\infty$ by three computations (mpmath intervals, exact rational arithmetic, Arb). No step has been formally verified, and no human referee has examined the certificates.}
+\caption{Status of the steps behind Proposition~\ref{prop:Psigma-unique}. The convexity certificate was reproduced by a second, independently written implementation (also AI-assisted); the inclusion for $\kappa=\infty$ by three computations (mpmath intervals, exact rational arithmetic, Arb). No step has been formally verified, and no human referee has examined either the certificates or the hand proofs of Lemmas~\ref{lem:guaranteed}--\ref{lem:remainder} and of the reduction in Section~\ref{subsec:finite-kappa}; the hand proofs were cross-read only by AI systems.}
 \label{tab:cert-status}
 \end{table}
 
