@@ -90,7 +90,7 @@ Let $K=[a,b]\subset(0,\infty)$ be compact and $\kappa>0$. Set $c_K:=\frac{2\kapp
 \end{align*}
 For any $\varepsilon\in(0,1)$ a sufficient uniform choice for the $\tau$-case is
 \[
-M_\tau^{\mathrm{unif}}=\max\left\{1,\ \left\lceil b+\frac{1}{c_K}\log\!\Bigl(\frac{1}{(1-e^{-c_K})\,\varepsilon}\Bigr)\right\rceil\right\}.
+M_\tau^{\mathrm{unif}}=\left\lceil b+\frac{1}{c_K}\log\!\Bigl(\frac{1}{(1-e^{-c_K})\,\varepsilon}\Bigr)\right\rceil\ \ (\ge1,\text{ since }b>0\text{ and the logarithm is positive}).
 \]
 For the $\sigma$-case one may select the minimal integer $M\ge1$ such that
 \[
@@ -116,7 +116,7 @@ A small remainder is obtained by choosing $M$ beyond $b$, as in the choices of $
 \end{remark}
 
 \begin{remark}[On the tail constants]
-The bounds in Theorem~\ref{thm:truncation} use the exact logistic inequality $\phi_\kappa(u)\le e^{-2\kappa(u-1)}$. The factor $e^{2\kappa}=r^{-(b+1)}$ produced by the shift $u-1$ cannot be dropped: for $\kappa=5$, $K=[1,10]$ and $M=11$ the actual $\tau$-tail reaches $5.1\cdot10^{-3}$, whereas $r^{M+1}/(1-r)\approx3.1\cdot10^{-5}$. Any re-centering of the tail only improves the global constant without changing the geometric rate.
+The bounds in Theorem~\ref{thm:truncation} use the exact logistic inequality $\phi_\kappa(u)\le e^{-2\kappa(u-1)}$. The factor $e^{2\kappa}=r^{-(b+1)}$ produced by the shift $u-1$ cannot be dropped: for $\kappa=5$, $K=[1,10]$ and $M=11$ the actual $\tau$-tail (supremum over $x\in K$) is $5.17\cdot10^{-3}$, whereas $r^{M+1}/(1-r)\approx3.1\cdot10^{-5}$. Any re-centering of the tail only improves the global constant without changing the geometric rate.
 \end{remark}
 
 

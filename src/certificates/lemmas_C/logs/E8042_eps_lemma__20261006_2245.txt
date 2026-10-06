@@ -1,0 +1,12 @@
+E8042 Lemma E eps_p 2026-10-06 22:10
+R1 p=23: eps = 1.138741e-04  (i<=p: 1.098e-06, i>=p+2: 1.128e-04, e2/e1 = 102.7)
+R1 p=29: eps = 3.521043e-05  (i<=p: 2.714e-07, i>=p+2: 3.494e-05, e2/e1 = 128.7)
+R1 p=31: eps = 2.512627e-05  (i<=p: 1.814e-07, i>=p+2: 2.494e-05, e2/e1 = 137.5)
+R1 p=37: eps = 1.027015e-05  (i<=p: 6.210e-08, i>=p+2: 1.021e-05, e2/e1 = 164.4)
+R1 p=101: eps = 6.450117e-08  (i<=p: 1.344e-10, i>=p+2: 6.437e-08, e2/e1 = 479.0)
+R1 p=1009: eps = 5.560451e-13  (i<=p: 8.414e-17, i>=p+2: 5.560e-13, e2/e1 = 6607.4)
+R2 ell(23) = 20.3807; Bedingungen: {'2 C ln23 > 2': True, '2/ln23 < 2C(41/50)(24/24.18)': True, 'C ln23 > 1.22': True, '(26/25)^3 exp(-ell 24/24.18) < 1/2': True}; (26/25)^3 exp(..) = 1.844e-09
+R3/R4: 76 Primzahlen
+R3 4864 Faelle: Verletzungen |B_rest| <= p eps(p): 0; max |B_rest|/(p eps) = 4.736e-03 (kleinster Faktor 2.111e+02); Mutant eps*1e-6 verletzt 1766 Faelle
+R4 Summe der Einzelschranken <= p eps(p): Verletzungen 0; Teilsumme i>=p+2 <= 2 T_(p+2): Verletzungen 0
+ERGEBNIS: GRUEN (38 s)

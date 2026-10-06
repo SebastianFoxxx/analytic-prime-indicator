@@ -1,0 +1,6 @@
+E8041 Zertifikat Klassen exakt 2026-10-06 22:09
+Klasse 1 (p >= 31) C=3,25 exakte Koeffizienten: ok=True Zielmarge=0.5  P''/p >= 0.9084107052407592  Abweichung zu E7833: 4.39e-09  E=2.5126e-05 t-Boxen=64 argmin t in [0.00000,0.00281]
+   Z3 Mutant c_a = 0: ok=False untere Schranke None (deutlich kleiner als 0.908 oder nicht zertifizierbar erwartet)
+Klasse 5 (p >= 23) C=3,25 exakte Koeffizienten: ok=True Zielmarge=0.5  P''/p >= 0.82191165801751  Abweichung zu E7833: 5.04e-09  E=1.1387e-04 t-Boxen=64 argmin t in [0.00000,0.00281]
+   Z3 Mutant c_a = 0: ok=False untere Schranke None (deutlich kleiner als 0.822 oder nicht zertifizierbar erwartet)
+ERGEBNIS: GRUEN (26 s)

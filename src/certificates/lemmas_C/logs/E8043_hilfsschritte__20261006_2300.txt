@@ -1,0 +1,16 @@
+E8043 Hilfsschritte 2026-10-06 22:11
+D1 9216 Faelle: (a) D/p <= D0: Verletzungen 0 (max Verhaeltnis 0.4308); (b) (1-phi_(p+1))E/p <= (24/23) g_24 W_C: Verletzungen 0 (max Verhaeltnis 1.0000); Mutant g_1009 verletzt 19 Faelle an p=23
+D2 g_n(s) fallend in n (Arb, getrennte Baelle): Verletzungen 0
+D3 Arb: C = 3.0: zertifiziert = False  sup(Delta_up + D0) <= None  (85 Intervalle)
+D3 Arb: C = 3.04: zertifiziert = False  sup(Delta_up + D0) <= None  (89 Intervalle)
+D3 Arb: C = 3.05: zertifiziert = True  sup(Delta_up + D0) <= 0.001497207261987391  (18 Intervalle)
+D3 Arb: C = 3.1: zertifiziert = True  sup(Delta_up + D0) <= 0.0014860596548727269  (10 Intervalle)
+D3 Arb: C = 3.25: zertifiziert = True  sup(Delta_up + D0) <= 0.0013911105746561522  (7 Intervalle)
+D3 kritischer Wert C* (Arb-Zertifikat schliesst ab) in [3.04386, 3.04386]
+B1 B_edge-Formel (U, V): max relative Abweichung ueber 200 Faelle = 1.364e-39
+T1 Schwelle y_p = kappa/(p+1) fuer P_sigma'(p;kappa) <= -3/4 (3 <= p <= 499): Minimum 1.6649 (p=3), Maximum 4.9441 (p=499)
+T2 sup_x tail (Float64) = 5.168791e-03 bei x = 9.576853  (Gitter 90001 + Verfeinerung)
+T2 r^(M+1)/(1-r) = 3.0633e-05
+T2 Arb am Maximierer: Summe i=12..400 = 5.168791e-03, Schwanzschranke 7.99e-161
+T3 ceil(b + c^-1 log(1/((1-e^-c) eps))) >= 1: Verletzungen 0 / 400
+ERGEBNIS: GRUEN (142 s)

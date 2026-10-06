@@ -1,0 +1,35 @@
+E8040 Lemma K Klassengewichte 2026-10-06 22:09
+A  Klasse 1: q in [53, 200000], 2666000 Paare (q,rho): Verletzungen 0
+A  Klasse 5: q in [53, 200000], 2666000 Paare (q,rho): Verletzungen 0
+B  K_r(rho) (exakt):
+   Klasse 1: Wertemenge ['0', '1/3', '1/2', '1', '4/3', '3/2', '2']
+     rho= -3: gcd(r-rho,6)=2  K=1/2
+     rho= -2: gcd(r-rho,6)=3  K=1/3
+     rho= -1: gcd(r-rho,6)=2  K=1/2
+     rho=  1: gcd(r-rho,6)=6  K=2
+     rho=  2: gcd(r-rho,6)=1  K=1
+     rho=  3: gcd(r-rho,6)=2  K=3/2
+     rho=  4: gcd(r-rho,6)=3  K=4/3
+     rho=  5: gcd(r-rho,6)=2  K=3/2
+     rho=  6: gcd(r-rho,6)=1  K=1
+     rho=  7: gcd(r-rho,6)=6  K=2
+   Klasse 5: Wertemenge ['0', '1/3', '1/2', '1', '4/3', '3/2', '2']
+     rho= -3: gcd(r-rho,6)=2  K=1/2
+     rho= -2: gcd(r-rho,6)=1  K=0
+     rho= -1: gcd(r-rho,6)=6  K=1
+     rho=  1: gcd(r-rho,6)=2  K=3/2
+     rho=  2: gcd(r-rho,6)=3  K=4/3
+     rho=  3: gcd(r-rho,6)=2  K=3/2
+     rho=  4: gcd(r-rho,6)=1  K=1
+     rho=  5: gcd(r-rho,6)=6  K=2
+     rho=  6: gcd(r-rho,6)=1  K=1
+     rho=  7: gcd(r-rho,6)=2  K=3/2
+C  Abstand alt (q=10^9+7) - neu (exakt): max 3.700e-08
+D  Primzahlen bis 6000000: 412849
+D  Klasse 1 (p >= 31): 206342 Primzahlen x 80 rho: Verletzungen 0; kleinster Abstand sum/p - c_a = 0.000e+00
+D  Klasse 5 (p >= 23): 206499 Primzahlen x 80 rho: Verletzungen 0; kleinster Abstand sum/p - c_a = 0.000e+00
+F  Mutant c_a * 1,01, Klasse 1: Verletzungen 4949160
+F  Mutant c_a * 1,01, Klasse 5: Verletzungen 4540082
+E  Teilmengen-Kontrolle (p < 3000, 5057 Paare): 0 Verletzungen
+Auswertung: A True, B True, C True, D True, E True, F(Mutant faellt) True
+ERGEBNIS: GRUEN (44 s)
