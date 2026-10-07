@@ -57,13 +57,9 @@ In particular, for $l=0$ one has $|F(x,i)|\le i^2$, and
 Differentiation yields, for $l\ge1$,
 \[
 \partial_x^l F(x,i)=2\sum_{k=1}^{i-1}(i-k)\left(\frac{2\pi k}{i}\right)^{\!l}
-\!\times\!
-\begin{cases}
-\cos(2\pi k x/i), & l\ \text{even},\\
--\sin(2\pi k x/i), & l\ \text{odd}.
-\end{cases}
+\cos\!\left(\frac{2\pi k x}{i}+\frac{l\pi}{2}\right).
 \]
-Since $|\cos(\cdot)|\le 1$ and $|\sin(\cdot)|\le 1$,
+Since $|\cos(\cdot)|\le 1$,
 \[
 \bigl|\partial_x^l F(x,i)\bigr|
 \le 2\left(\frac{2\pi}{i}\right)^{\!l}\sum_{k=1}^{i-1}(i-k)k^l.
@@ -87,7 +83,7 @@ for some $A_l>0$. Consequently,
 \sup_{x\in\mathbb{R}}|\partial_x^l F(x,i)|
 \le \frac{2}{(l+1)(l+2)}(2\pi)^l\, i^{2}\;+\;B_l\,(2\pi)^l\, i.
 \]
-Thus the leading constant equals $2/[(l+1)(l+2)]$ with a linear remainder term.
+Thus the leading constant can be taken to be $2/[(l+1)(l+2)]$, with a linear remainder term.
 \end{remark}
 
 
